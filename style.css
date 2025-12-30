@@ -610,26 +610,55 @@ p.subtitle {
 
 @media (max-width: 480px) {
     .card {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1rem;
         margin: 1rem;
-        /* Add margin so it doesn't touch edges */
-        max-height: 90vh;
+        max-height: 85vh;
+        /* Reduce slightly to clear footer */
         overflow-y: auto;
-        /* Scroll if content is too tall */
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        /* Smaller heading */
+        margin-bottom: 0.2rem;
+    }
+
+    p.subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .btn-group {
         flex-direction: column;
-        gap: 1rem;
-        align-items: center;
+        gap: 0.8rem;
+        width: 100%;
     }
 
     .btn {
         width: 100%;
-        /* Full width buttons on mobile */
+        padding: 12px 20px;
+        /* Comfortable touch target */
+        font-size: 1rem;
+    }
+
+    /* Move music button up to avoid footer collision */
+    .music-btn {
+        bottom: 60px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+
+    /* Adjust footer text size */
+    .footer {
+        font-size: 0.8rem;
+        bottom: 10px;
+        padding: 0 10px;
+    }
+
+    /* Make gift box slightly smaller */
+    .gift-box {
+        transform: scale(0.8);
     }
 }
