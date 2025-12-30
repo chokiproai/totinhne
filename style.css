@@ -641,6 +641,13 @@ p.subtitle {
         font-size: 1rem;
     }
 
+    /* FIX: Don't let the 'No' button be full width, otherwise it blocks text when it flies around */
+    .btn-no {
+        width: auto;
+        min-width: 120px;
+        /* Minimum width for touch */
+    }
+
     /* Move music button up to avoid footer collision */
     .music-btn {
         bottom: 60px;
