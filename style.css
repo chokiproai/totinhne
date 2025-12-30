@@ -1,0 +1,635 @@
+:root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff8fa3;
+    --accent-color: #ffe5ec;
+    --text-color: #590d22;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background floating shapes */
+.shape {
+    position: absolute;
+    filter: blur(50px);
+    z-index: -1;
+    animation: float 20s infinite;
+}
+
+.shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: #ff4d6d;
+    border-radius: 50%;
+}
+
+.shape-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 350px;
+    height: 350px;
+    background: #a18cd1;
+    border-radius: 50%;
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    top: 20%;
+    right: 20%;
+    width: 150px;
+    height: 150px;
+    background: #fbc2eb;
+    border-radius: 50%;
+    animation-delay: -10s;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(30px, -50px) rotate(10deg);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+.container,
+.modal {
+    position: relative;
+    z-index: 10;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    /* Slight overlay */
+}
+
+/* Main Card Premium Style */
+.card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 3rem 4rem;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 77, 109, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 1s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    /* Delayed slightly for effect */
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0 60px rgba(255, 77, 109, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+h1 {
+    color: var(--text-color);
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+p.subtitle {
+    color: #883e53;
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    min-height: 3em;
+    /* Reserve space for typing */
+    display: inline-block;
+}
+
+/* Typewriter Cursor */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-start infinite;
+    color: var(--primary-color);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Polaroid Image Style */
+.gif-container {
+    margin-bottom: 2rem;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 8px solid white;
+    border-bottom: 25px solid white;
+    /* Polaroid bottom */
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.gif-container:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.gif-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+    min-height: 60px;
+}
+
+.btn {
+    padding: 14px 36px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+}
+
+.btn-yes {
+    background: var(--primary-color);
+    color: white;
+    animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    }
+}
+
+.btn-yes:hover {
+    background: #ff2a51;
+    animation: none;
+    /* Stop pulsing on hover so scale doesn't conflict */
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(255, 77, 109, 0.8);
+}
+
+.btn-no {
+    background: white;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 50;
+    /* Ensure it stays above other things */
+    transition: top 0.2s, left 0.2s;
+    /* Add smooth transition for movement */
+}
+
+/* Music Toggle Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    /* Changed to left to avoid collision with potential chat widgets or z-indexes */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: rotateDisc 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.music-btn.playing {
+    background: var(--primary-color);
+    color: white;
+    animation-play-state: running;
+    box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+}
+
+@keyframes rotateDisc {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Setup Modal Styles */
+#lover-name,
+#generated-link {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 50px;
+    /* Rounder inputs */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    outline: none;
+    transition: 0.3s;
+}
+
+#lover-name:focus {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.2);
+}
+
+.link-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    /* Remove default flex alignment to handle button nicely */
+}
+
+#generated-link {
+    margin-bottom: 0;
+    /* Reset margin for inline display */
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+#copy-btn {
+    padding: 0 25px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+    white-space: nowrap;
+}
+
+#copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 77, 109, 0.5);
+    background: linear-gradient(45deg, #ff2a51, #ff758f);
+}
+
+#copy-btn:active {
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Floating Hearts */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.success-message {
+    display: none;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Cinematic Gift Box Entrance */
+#entrance-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #2e1c2b 0%, #000000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease-in-out, visibility 1s;
+}
+
+#entrance-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.gift-container {
+    text-align: center;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.gift-box {
+    position: relative;
+    width: 150px;
+    height: 120px;
+    margin: 0 auto;
+    animation: shakeBox 2s infinite ease-in-out;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+/* Shake Animation */
+@keyframes shakeBox {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform: rotate(-3deg);
+    }
+}
+
+.box-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff4d6d;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ribbon-body {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.lid {
+    position: absolute;
+    top: -20px;
+    left: -5px;
+    width: 160px;
+    height: 35px;
+    background: #ff758f;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transition: all 0.5s ease-in;
+    transform-origin: top center;
+}
+
+.ribbon-v {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 100%;
+    background: #fff;
+}
+
+.ribbon-h {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 30px;
+}
+
+/* Opening Animation Class */
+.gift-box.open .lid {
+    animation: flyLid 1s forwards;
+}
+
+@keyframes flyLid {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+
+    30% {
+        transform: translateY(-30px) rotate(-10deg);
+    }
+
+    100% {
+        transform: translateY(-400px) rotate(-40deg) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Footer Credits */
+.footer {
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    z-index: 100;
+    font-family: 'Outfit', sans-serif;
+    pointer-events: none;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 5px;
+    transition: color 0.3s;
+    pointer-events: auto;
+}
+
+.footer a:hover {
+    color: #ff4d6d;
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+}
+
+.gift-box.open {
+    animation: none;
+    /* Stop shaking */
+}
+
+.hint-text {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 50px;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;
+    animation: fadeInText 2s infinite alternate;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+        /* Add margin so it doesn't touch edges */
+        max-height: 90vh;
+        overflow-y: auto;
+        /* Scroll if content is too tall */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        /* Full width buttons on mobile */
+    }
+}

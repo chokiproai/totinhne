@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi cậu người thương</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Cinematic Entrance Overlay -->
+    <div id="entrance-overlay">
+        <div class="gift-container">
+            <div class="gift-box">
+                <div class="click-area"></div>
+                <div class="lid">
+                    <div class="lid-shadow"></div>
+                    <div class="ribbon-v"></div>
+                    <div class="ribbon-h"></div>
+                </div>
+                <div class="box-body">
+                    <div class="box-shadow"></div>
+                    <div class="ribbon-body"></div>
+                </div>
+            </div>
+            <p class="hint-text">Chạm để mở quà 🎁</p>
+        </div>
+    </div>
+
+    <!-- Ambient Background Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+
+    <!-- Floating Hearts Container -->
+    <div class="hearts-container" id="hearts-container"></div>
+
+    <!-- Setup Modal (Creator Mode) -->
+    <div id="setup-modal" class="modal">
+        <div class="card modal-content">
+            <h1>Tạo lời tỏ tình</h1>
+            <p class="subtitle">Nhập tên người ấy để tạo trang web riêng nhé!</p>
+            <input type="text" id="lover-name" placeholder="Ví dụ: Bé Mèo, Crush..." autocomplete="off">
+            <button class="btn btn-yes" id="create-link-btn">Tạo Link</button>
+            <div id="result-area" class="hidden">
+                <p>Link của bạn nè:</p>
+                <div class="link-box">
+                    <input type="text" id="generated-link" readonly>
+                    <button id="copy-btn">Copy</button>
+                </div>
+                <button class="btn btn-yes" id="go-to-link-btn">Xem thử ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="bg-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <button id="music-toggle" class="music-btn">🎵</button>
+
+    <!-- Main Confession Content -->
+    <div class="container hidden" id="main-content">
+        <div class="card">
+            <div id="ask-section">
+                <div class="gif-container">
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Q0ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif"
+                        alt="Cute animated bear" id="main-image">
+                </div>
+                <!-- Dynamic Name will be inserted here -->
+                <h1 id="greeting">Gửi cậu người thương</h1>
+                <p class="subtitle typing-cursor" id="question-text"></p>
+
+                <div class="btn-group">
+                    <button class="btn btn-yes" id="btn-yes">Đồng ý</button>
+                    <button class="btn btn-no" id="btn-no">Không nha</button>
+                </div>
+            </div>
+
+            <div id="success-section" class="success-message">
+                <div class="gif-container">
+                    <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif?cid=ecf05e478206d4o856187788106295325016201004128522&rid=giphy.gif&ct=s"
+                        alt="Celebration" id="success-image">
+                </div>
+                <h1 id="success-title">Yeahhh! Tớ biết mà! ❤️</h1>
+                <p class="subtitle">Hôm nay là ngày đẹp nhất đời tớ. Yêu cậu nhiều lắm!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Credits -->
+    <div class="footer">
+        Web by <a href="https://www.facebook.com/share/1AkHwaJZTu/" target="_blank">Ngọc Tuấn</a> |
+        <a href="https://github.com/chokiproai/totinhne" target="_blank">Mã Nguồn</a><br>
+        <span style="font-size: 0.8em; opacity: 0.8;">(Bản Beta - Có gì inbox <a
+                href="https://www.facebook.com/share/1AkHwaJZTu/" target="_blank">FB</a> để fix lỗi :0)</span>
+    </div>
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
