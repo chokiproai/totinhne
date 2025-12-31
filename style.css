@@ -175,6 +175,19 @@ h1 {
     text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
 }
 
+.highlight-name {
+    background: linear-gradient(to right, #ffefba, #ffffff);
+    /* Gold/White gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 77, 109, 0.8);
+    /* Glow effect */
+    font-size: 1.1em;
+    /* Make it slightly larger */
+    display: inline-block;
+}
+
 p.subtitle {
     color: #883e53;
     font-size: 1.2rem;

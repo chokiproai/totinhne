@@ -46,7 +46,8 @@ if (toName) {
     // --- RECIPIENT MODE (View) ---
     setupModal.classList.add('hidden');
     mainContent.classList.remove('hidden');
-    greeting.textContent = `Gửi ${toName} người thương`;
+    // Use innerHTML to style the name separately
+    greeting.innerHTML = `Gửi <span class="highlight-name">${toName}</span> người thương`;
     document.title = `Gửi ${toName} ❤️`;
 
     // Only enable Gift Box interaction in Recipient Mode
