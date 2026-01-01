@@ -240,3 +240,147 @@ btnYes.addEventListener('click', () => {
     askSection.style.display = 'none';
     successSection.style.display = 'block';
 });
+
+// --- ULTRA PREMIUM JS EFFECTS ---
+
+// 1. Shooting Stars Logic
+function createShootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    // Random Styles
+    star.style.top = Math.random() * window.innerHeight * 0.5 + 'px'; // Top half
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+
+    document.body.appendChild(star);
+
+    setTimeout(() => star.remove(), 4000);
+}
+// Create star every 2 seconds
+setInterval(createShootingStar, 2000);
+
+// 2. Fairy Dust Cursor Trail
+function createParticle(x, y) {
+    // Limit creation rate for performance
+    if (Math.random() > 0.3) return;
+
+    const particle = document.createElement('div');
+    particle.classList.add('cursor-particle');
+
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+
+    // Random color variant (Gold/Pink/White)
+    const colors = ['#fff', '#ffecb3', '#ff8fa3'];
+    particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => particle.remove(), 1000);
+}
+
+document.addEventListener('mousemove', (e) => createParticle(e.pageX, e.pageY));
+document.addEventListener('touchmove', (e) => {
+    // e.preventDefault(); // Don't block scroll completely relative to body? Maybe risky
+    const touch = e.touches[0];
+    createParticle(touch.pageX, touch.pageY);
+}, { passive: true });
+
+
+// 3. 3D Tilt Effect for Card
+const card = document.querySelector('.card');
+if (card) {
+    // Add glare element
+    const glare = document.createElement('div');
+    glare.classList.add('card-glare');
+    card.appendChild(glare);
+
+    function handleMove(x, y) {
+        const rect = card.getBoundingClientRect();
+
+        // Calculate percentages (0 to 1) relative to card
+        // Allow tilt even if cursor is outside (clamped) or check bounds? 
+        // Better to check relative to center of viewport for smoother feel on mobile?
+        // Let's stick to card-relative for now.
+
+        const xPct = (x - rect.left) / rect.width;
+        const yPct = (y - rect.top) / rect.height;
+
+        // Convert to rotation degrees (-10 to 10)
+        // Clamp values to prevent extreme flipping if touch is far outside
+        const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+
+        const xDeg = (clamp(yPct, 0, 1) - 0.5) * 20;
+        const yDeg = (0.5 - clamp(xPct, 0, 1)) * 20;
+
+        card.style.transform = `perspective(1000px) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
+
+        // Adjust Glare
+        glare.style.opacity = 0.5 + (xPct * 0.5);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        handleMove(e.clientX, e.clientY);
+    });
+
+    // Touch support for tilt
+    document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        handleMove(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    // Reset on mouse leave or touch end
+    function resetTilt() {
+        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+        glare.style.opacity = 0;
+    }
+
+    document.addEventListener('mouseleave', resetTilt);
+    document.addEventListener('touchend', resetTilt);
+}
+
+// 4. Dynamic Slideshow
+const slideImages = [
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Q0ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif", // Bear Love
+    "https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif", // Cute Heart
+    "https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif", // Cat Love
+    "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"      // Cat Blink
+];
+let currentSlide = 0;
+const mainImage = document.getElementById('main-image');
+
+if (mainImage) {
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slideImages.length;
+        mainImage.style.opacity = 0; // Fade out
+        setTimeout(() => {
+            mainImage.src = slideImages[currentSlide];
+            mainImage.style.opacity = 1; // Fade in
+        }, 1000); // Wait for transition
+    }, 4000); // Change every 4s
+}
+
+// 5. Floating Love Messages
+const loveMessages = [
+    "Nhớ cậu quá àaa 🥺", "Yêu cậu 3000 ❤️", "Cậu là nhất!",
+    "Xinh quá đi 😍", "Bé ngoan của tớ", "Moahzz 😘",
+    "Trái tim tớ thuộc về cậu", "Cậu cười xinh lắm á"
+];
+
+function createFloatingMessage() {
+    const msg = document.createElement('div');
+    msg.classList.add('love-bubble');
+    msg.innerText = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+
+    // Random position at bottom
+    msg.style.left = Math.random() * 80 + 10 + 'vw'; // 10-90vw
+    msg.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4-7s float time
+
+    document.body.appendChild(msg);
+
+    setTimeout(() => msg.remove(), 7000);
+}
+
+// Start floating messages after gift opens (simple check or delay key)
+setInterval(createFloatingMessage, 3500);
