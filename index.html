@@ -45,8 +45,19 @@
         <div class="card modal-content">
             <h1>Tạo lời tỏ tình</h1>
             <p class="subtitle">Nhập tên người ấy để tạo trang web riêng nhé!</p>
+
+            <div style="margin-bottom: 1rem; text-align: left;">
+                <label style="color: white; font-size: 0.9rem; margin-left: 5px;">Gửi cho:</label>
+                <select id="gender-select"
+                    style="width: 100%; border-radius: 15px; padding: 12px; border: 1px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.4); outline: none; font-family: 'Outfit', sans-serif; color: #333;">
+                    <option value="f">Bạn Nữ</option>
+                    <option value="m">Bạn Nam</option>
+                </select>
+            </div>
+
             <input type="text" id="lover-name" placeholder="Ví dụ: Bé Mèo, Crush..." autocomplete="off">
-            <textarea id="custom-msg" rows="3" placeholder="Lời nhắn nhủ... (Mặc định: Tớ thích cậu...)" style="width: 100%; border-radius: 15px; padding: 12px; border: 1px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.4); margin-bottom: 1.5rem; outline: none; font-family: 'Outfit', sans-serif; resize: none;"></textarea>
+            <textarea id="custom-msg" rows="3" placeholder="Lời nhắn nhủ... (Mặc định: Tớ thích cậu...)"
+                style="width: 100%; border-radius: 15px; padding: 12px; border: 1px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.4); margin-bottom: 1.5rem; outline: none; font-family: 'Outfit', sans-serif; resize: none;"></textarea>
             <button class="btn btn-yes" id="create-link-btn">Tạo Link</button>
             <div id="result-area" class="hidden">
                 <p>Link của bạn nè:</p>

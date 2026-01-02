@@ -41,13 +41,19 @@ const giftBox = document.querySelector('.gift-box');
 // 1. Check URL Parameters
 const urlParams = new URLSearchParams(window.location.search);
 const toName = urlParams.get('to');
+const genderParam = urlParams.get('g'); // 'm' or 'f'
+
+// Apply Theme immediately if Gender is Male
+if (genderParam === 'm') {
+    document.body.classList.add('theme-blue');
+}
 
 if (toName) {
     // --- RECIPIENT MODE (View) ---
     setupModal.classList.add('hidden');
     mainContent.classList.remove('hidden');
     // Use innerHTML to style the name separately
-    greeting.innerHTML = `Gửi <span class="highlight-name">${toName}</span> người thương`;
+    greeting.innerHTML = `Gửi <span class="highlight-name">${toName}</span> người thương,`;
     document.title = `Gửi ${toName} ❤️`;
 
     // Only enable Gift Box interaction in Recipient Mode
@@ -72,7 +78,13 @@ if (toName) {
 
     // Typewriter Function
     const urlMsg = urlParams.get('msg');
-    const defaultMsg = "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm người yêu tớ nha?";
+
+    // Adaptive Default Message based on Gender
+    let defaultMsg = "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm người yêu tớ nha?";
+    if (genderParam === 'm') {
+        defaultMsg = "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm 'gà bông' của tớ nha?";
+    }
+
     const questionText = urlMsg || defaultMsg;
 
     // If msg is very long, maybe adjust font size? (Handling via CSS might be better)
@@ -105,10 +117,16 @@ if (toName) {
 createLinkBtn.addEventListener('click', () => {
     const name = loverNameInput.value.trim();
     const customMsg = document.getElementById('custom-msg').value.trim();
+    const gender = document.getElementById('gender-select').value;
 
     if (name) {
         const baseUrl = window.location.href.split('?')[0];
         let fullUrl = `${baseUrl}?to=${encodeURIComponent(name)}`;
+
+        // Append Gender
+        if (gender) {
+            fullUrl += `&g=${gender}`;
+        }
 
         if (customMsg) {
             fullUrl += `&msg=${encodeURIComponent(customMsg)}`;
@@ -121,6 +139,18 @@ createLinkBtn.addEventListener('click', () => {
         alert('Vui lòng nhập tên người ấy nha!');
     }
 });
+
+// Dynamic Theme Preview for Creator
+const genderSelect = document.getElementById('gender-select');
+if (genderSelect) {
+    genderSelect.addEventListener('change', () => {
+        if (genderSelect.value === 'm') {
+            document.body.classList.add('theme-blue');
+        } else {
+            document.body.classList.remove('theme-blue');
+        }
+    });
+}
 
 copyBtn.addEventListener('click', () => {
     generatedLinkInput.select();
@@ -139,7 +169,12 @@ goToLinkBtn.addEventListener('click', () => {
 function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
-    heart.innerHTML = '❤️'; // Or use SVG/Image
+
+    // Check Theme
+    const isBlue = document.body.classList.contains('theme-blue');
+    const emojis = isBlue ? ['💙', '🤍', '✨', '🥶'] : ['❤️', '💖', '🥰', '✨'];
+
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
     // Random properties
     heart.style.left = Math.random() * 100 + 'vw';
@@ -286,7 +321,10 @@ function createParticle(x, y) {
     particle.style.top = y + 'px';
 
     // Random color variant (Gold/Pink/White)
-    const colors = ['#fff', '#ffecb3', '#ff8fa3'];
+    // Check theme for colors
+    const isBlue = document.body.classList.contains('theme-blue');
+    const colors = isBlue ? ['#fff', '#dfe6e9', '#74b9ff'] : ['#fff', '#ffecb3', '#ff8fa3'];
+
     particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
 
     document.body.appendChild(particle);
@@ -378,7 +416,7 @@ const successImage = document.getElementById('success-image');
 let slideshowInterval;
 
 // BASE64 FALLBACK (Cute Static Heart) - Ultimate Safety Net
-const base64Fallback = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmNGQ2ZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAz.81IDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
+const base64Fallback = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmNGQ2ZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
 
 // Error Handling Function
 function handleImageError(imgElement, array, indexVar) {
@@ -453,20 +491,37 @@ function startSuccessSlideshow() {
 }
 
 // 5. Floating Love Messages
-const loveMessages = [
-    "Nhớ cậu quá àaa 🥺", "Yêu cậu 3000 ❤️", "Cậu là nhất!",
+// 5. Floating Love Messages
+const loveMessagesFemale = [
+    "Nhớ cậu quá àaa 🥺", "Yêu cậu 3000 ❤️", "Hong bé ơi!",
     "Xinh quá đi 😍", "Bé ngoan của tớ", "Moahzz 😘",
     "Trái tim tớ thuộc về cậu", "Cậu cười xinh lắm á"
+];
+
+const loveMessagesMale = [
+    "Nhớ cậu quá àaa 🥺", "Yêu cậu 3000 ❤️", "Đẹp trai quá nhe 😎",
+    "Ngầu quá đi!", "Chàng trai của tớ", "Moahzz 😘",
+    "Cậu là tuyệt nhất", "Cười cái coi nào 😁"
 ];
 
 function createFloatingMessage() {
     const msg = document.createElement('div');
     msg.classList.add('love-bubble');
-    msg.innerText = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+
+    // Check Theme
+    const isBlue = document.body.classList.contains('theme-blue');
+
+    // Select appropriate list
+    const messages = isBlue ? loveMessagesMale : loveMessagesFemale;
+
+    msg.innerText = messages[Math.floor(Math.random() * messages.length)];
 
     // Random position at bottom
     msg.style.left = Math.random() * 80 + 10 + 'vw'; // 10-90vw
     msg.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4-7s float time
+
+    // If Blue theme, maybe change icon via CSS or here
+    // The CSS rule .theme-blue .love-bubble::before handles the emoji color/icon
 
     document.body.appendChild(msg);
 

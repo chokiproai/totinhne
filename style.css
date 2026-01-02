@@ -899,3 +899,66 @@ body::after {
         opacity: 0;
     }
 }
+
+/* --- PHASE 4: GENDER SUPPORT (BLUE THEME) --- */
+body.theme-blue {
+    --primary-color: #00a8ff;
+    /* Bright Blue */
+    --secondary-color: #f0f8ff;
+    /* Alice Blue */
+}
+
+/* Adjust gradients for Blue Theme */
+body.theme-blue::before {
+    background: radial-gradient(circle at 20% 30%, rgba(0, 168, 255, 0.4), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(64, 224, 208, 0.4), transparent 50%);
+    /* Turquoise */
+}
+
+/* Adjust shadows for Blue Theme Cards */
+body.theme-blue .card {
+    box-shadow: 0 0 40px rgba(0, 168, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+body.theme-blue .btn-yes {
+    background: linear-gradient(45deg, #00a8ff, #0097e6);
+    box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
+}
+
+body.theme-blue .highlight-name {
+    background: linear-gradient(to right, #81ecec, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Blue particles for cursor/burst */
+body.theme-blue .cursor-particle,
+body.theme-blue .love-bubble::before {
+    filter: hue-rotate(180deg);
+    /* Shift Pink to Blueish */
+}
+
+body.theme-blue .click-heart {
+    filter: hue-rotate(180deg);
+}
+
+/* Blue Gift Box Overrides */
+body.theme-blue .box-body {
+    background: #0984e3;
+    /* Blue */
+    box-shadow: 0 10px 30px rgba(9, 132, 227, 0.5);
+}
+
+body.theme-blue .lid {
+    background: #74b9ff;
+    /* Light Blue */
+}
+
+body.theme-blue .ribbon-body,
+body.theme-blue .ribbon-v,
+body.theme-blue .ribbon-h {
+    background: #dfe6e9;
+    /* Silver/White */
+}
