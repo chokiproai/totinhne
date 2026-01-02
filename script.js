@@ -188,9 +188,22 @@ function setupCreatorMode() {
     elements.mainContent?.classList.add('hidden');
 
     // Dynamic theme preview based on gender
-    // Dynamic theme preview based on gender
+    if (elements.genderSelect) {
+        // Sync initial state (handle browser autofill)
+        state.genderParam = elements.genderSelect.value;
+        if (state.genderParam === 'm') {
+            document.body.classList.add('theme-blue');
+            state.currentTheme = 'blue';
+        }
+    }
+
     elements.genderSelect?.addEventListener('change', (e) => {
         state.genderParam = e.target.value;
+
+        // Clear existing bubbles immediately so new ones appear
+        document.querySelectorAll('.love-bubble').forEach(el => el.remove());
+        createFloatingMessage(); // Spawn one immediately
+
         if (e.target.value === 'm') {
             document.body.classList.add('theme-blue');
             state.currentTheme = 'blue';
