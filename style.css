@@ -785,23 +785,40 @@ p.subtitle {
 }
 
 /* Floating Love Messages */
+/* Floating Love Messages - Premium Redesign */
 .love-bubble {
     position: fixed;
-    bottom: -50px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+    bottom: -60px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+
+    font-size: 1rem;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
     pointer-events: none;
     z-index: 50;
     opacity: 0;
-    animation: floatBubble 6s linear forwards;
-    font-weight: 500;
+
+    /* Combine float up and sway */
+    animation: floatUp 7s linear forwards, sway 3s ease-in-out infinite alternate;
 }
 
-@keyframes floatBubble {
+/* Add heart icon before text */
+.love-bubble::before {
+    content: '❤️ ';
+    margin-right: 5px;
+    filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.8));
+}
+
+@keyframes floatUp {
     0% {
         transform: translateY(0) scale(0.8);
         opacity: 0;
@@ -809,12 +826,26 @@ p.subtitle {
 
     10% {
         opacity: 1;
-        transform: translateY(-20px) scale(1);
+        transform: translateY(-30px) scale(1);
+    }
+
+    90% {
+        opacity: 0.8;
     }
 
     100% {
-        transform: translateY(-100vh) scale(1);
+        transform: translateY(-110vh) scale(1);
         opacity: 0;
+    }
+}
+
+@keyframes sway {
+    from {
+        margin-left: -15px;
+    }
+
+    to {
+        margin-left: 15px;
     }
 }
 
@@ -843,5 +874,28 @@ body::after {
     50% {
         transform: scale(1.1);
         opacity: 0.8;
+    }
+}
+
+/* Click Heart Burst */
+.click-heart {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center/contain;
+    pointer-events: none;
+    z-index: 9999;
+    animation: burstHeart 1s ease-out forwards;
+}
+
+@keyframes burstHeart {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1.5) rotate(var(--r));
+        opacity: 0;
     }
 }

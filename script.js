@@ -71,7 +71,12 @@ if (toName) {
     }
 
     // Typewriter Function
-    const questionText = "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm người yêu tớ nha?";
+    const urlMsg = urlParams.get('msg');
+    const defaultMsg = "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm người yêu tớ nha?";
+    const questionText = urlMsg || defaultMsg;
+
+    // If msg is very long, maybe adjust font size? (Handling via CSS might be better)
+
     const questionElement = document.getElementById('question-text');
     let charIndex = 0;
 
@@ -99,9 +104,15 @@ if (toName) {
 // 2. Creator Mode Logic
 createLinkBtn.addEventListener('click', () => {
     const name = loverNameInput.value.trim();
+    const customMsg = document.getElementById('custom-msg').value.trim();
+
     if (name) {
-        const baseUrl = window.location.href.split('?')[0]; // Remove existing params
-        const fullUrl = `${baseUrl}?to=${encodeURIComponent(name)}`;
+        const baseUrl = window.location.href.split('?')[0];
+        let fullUrl = `${baseUrl}?to=${encodeURIComponent(name)}`;
+
+        if (customMsg) {
+            fullUrl += `&msg=${encodeURIComponent(customMsg)}`;
+        }
 
         generatedLinkInput.value = fullUrl;
         resultArea.classList.remove('hidden');
@@ -239,6 +250,9 @@ btnYes.addEventListener('click', () => {
 
     askSection.style.display = 'none';
     successSection.style.display = 'block';
+
+    // Start Success GIFs
+    startSuccessSlideshow();
 });
 
 // --- ULTRA PREMIUM JS EFFECTS ---
@@ -341,24 +355,101 @@ if (card) {
 }
 
 // 4. Dynamic Slideshow
+// Local GIFs to ensure stability (Downloaded to /img folder)
 const slideImages = [
-    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Q0ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif", // Bear Love
-    "https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif", // Cute Heart
-    "https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif", // Cat Love
-    "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif"      // Cat Blink
+    "img/bear_hug.gif",
+    "img/cat_love.gif",
+    "img/heart.gif"
 ];
+
 let currentSlide = 0;
 const mainImage = document.getElementById('main-image');
 
-if (mainImage) {
-    setInterval(() => {
-        currentSlide = (currentSlide + 1) % slideImages.length;
-        mainImage.style.opacity = 0; // Fade out
-        setTimeout(() => {
-            mainImage.src = slideImages[currentSlide];
-            mainImage.style.opacity = 1; // Fade in
-        }, 1000); // Wait for transition
-    }, 4000); // Change every 4s
+// Success Images Array (Celebration)
+const successImages = [
+    "img/dance.gif",
+    "img/kiss.gif",
+    "img/bear_hug.gif",
+    "img/heart.gif"
+];
+
+let successSlide = 0;
+const successImage = document.getElementById('success-image');
+let slideshowInterval;
+
+// BASE64 FALLBACK (Cute Static Heart) - Ultimate Safety Net
+const base64Fallback = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmNGQ2ZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAz.81IDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
+
+// Error Handling Function
+function handleImageError(imgElement, array, indexVar) {
+    console.warn('Image failed:', imgElement.src);
+
+    // Prevent infinite loop if all fail
+    if (imgElement.getAttribute('data-failed') === 'true') {
+        imgElement.src = base64Fallback; // Show static heart
+        return indexVar;
+    }
+
+    imgElement.setAttribute('data-failed', 'true');
+
+    // Try next image
+    const nextIndex = (indexVar + 1) % array.length;
+    // imgElement.src = array[nextIndex]; // This might cause loop if next is also bad
+
+    // Better: Set to fallback immediately if one fails to be safe, 
+    // OR try next but with a safety flag.
+    // Let's go to fallback to avoid "blinking" broken images.
+    imgElement.src = base64Fallback;
+    return nextIndex;
+}
+
+// Function to start Main Slideshow
+function startMainSlideshow() {
+    if (mainImage) {
+        // Add error handler
+        mainImage.onerror = () => {
+            currentSlide = handleImageError(mainImage, slideImages, currentSlide);
+        };
+
+        slideshowInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideImages.length;
+            mainImage.style.opacity = 0;
+            // Reset failure flag on new attempt
+            mainImage.setAttribute('data-failed', 'false');
+
+            setTimeout(() => {
+                mainImage.src = slideImages[currentSlide];
+                mainImage.style.opacity = 1;
+            }, 1000);
+        }, 4000);
+    }
+}
+startMainSlideshow();
+
+// Function to start Success Slideshow (Call this on YES click)
+function startSuccessSlideshow() {
+    // Stop main slideshow
+    clearInterval(slideshowInterval);
+
+    // Start success rotation
+    if (successImage) {
+        // Add error handler
+        successImage.onerror = () => {
+            successSlide = handleImageError(successImage, successImages, successSlide);
+        };
+
+        setInterval(() => {
+            successSlide = (successSlide + 1) % successImages.length;
+            successImage.style.opacity = 0;
+            // Reset failure flag
+            successImage.setAttribute('data-failed', 'false');
+
+            setTimeout(() => {
+                successImage.src = successImages[successSlide];
+                successImage.style.opacity = 1;
+            }, 1000);
+        }, 3000);
+    }
 }
 
 // 5. Floating Love Messages
@@ -384,3 +475,55 @@ function createFloatingMessage() {
 
 // Start floating messages after gift opens (simple check or delay key)
 setInterval(createFloatingMessage, 3500);
+
+// --- PHASE 3: INTERACTION & AUDIO ---
+
+// 6. Click Heart Burst
+document.addEventListener('click', (e) => {
+    // Spawn 10 mini hearts
+    for (let i = 0; i < 10; i++) {
+        createClickHeart(e.clientX, e.clientY);
+    }
+});
+
+function createClickHeart(x, y) {
+    const heart = document.createElement('div');
+    heart.classList.add('click-heart');
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+
+    // Random direction
+    const tx = (Math.random() - 0.5) * 100 + 'px'; // -50px to 50px
+    const ty = (Math.random() - 0.5) * 100 + 'px';
+    const rot = (Math.random() - 0.5) * 360 + 'deg';
+
+    heart.style.setProperty('--x', tx);
+    heart.style.setProperty('--y', ty);
+    heart.style.setProperty('--r', rot);
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+}
+
+// 7. SFX Placeholder (Needs files to work)
+const sfx = {
+    pop: new Audio(), // src='pop.mp3'
+    chime: new Audio() // src='chime.mp3'
+};
+// Function to play sound if file exists
+function playSFX(name) {
+    if (sfx[name] && sfx[name].src) {
+        sfx[name].currentTime = 0;
+        sfx[name].play().catch(e => { }); // Ignore errors if no src
+    }
+}
+// Add hooks for SFX
+btnYes.addEventListener('mouseenter', () => playSFX('pop'));
+btnNo.addEventListener('mouseenter', () => playSFX('pop'));
+
+// 8. Custom Message Handling (Update Creator Logic)
+// This needs to update the existing 'createLinkBtn' listener higher up in the file.
+// Since we are appending, we might need to modify the file in place or accept that we need to Refactor.
+// For now, let's create a NEW listener that overrides or verify if we can edit lines 96-118 safely.
+// Actually, it's better to REPLACE the existing listener block.
+// Let's do that in a separate tool call to be safe interaction-wise.
