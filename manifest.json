@@ -1,0 +1,27 @@
+{
+    "name": "Gửi Cậu Người Thương",
+    "short_name": "Tỏ Tình",
+    "description": "Trang web tỏ tình lãng mạn - Gửi lời yêu thương đến người ấy",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ff9a9e",
+    "theme_color": "#ff4d6d",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "img/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["entertainment", "lifestyle"],
+    "lang": "vi",
+    "dir": "ltr"
+}
