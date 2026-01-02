@@ -63,12 +63,28 @@ const CONFIG = {
         female: [
             "Nhớ cậu quá àaa 🥺", "Yêu cậu 3000 ❤️", "Hong bé ơi!",
             "Xinh quá đi 😍", "Bé ngoan của tớ", "Moahzz 😘",
-            "Trái tim tớ thuộc về cậu", "Cậu cười xinh lắm á", "Mãi yêu cậu 💕"
+            "Trái tim tớ thuộc về cậu", "Cậu cười xinh lắm á", "Mãi yêu cậu 💕",
+            "Công chúa của tớ 👑", "Bé iu ơi 🌻", "Cậu là tất cả của tớ",
+            "Yêu bé nhiều lắm", "Cậu cute xỉu 😝", "Nụ cười tỏa nắng ☀️",
+            "Nhớ bé nhiều", "Bé ăn cơm chưa?", "Đừng thức khuya nha 🌙",
+            "Yêu mình cậu thôi", "Cậu là điều tuyệt vời nhất", "Hạnh phúc khi có cậu",
+            "Bên cậu bình yên lắm", "Thương cậu nhất trần đời", "Love you forever ❤️",
+            "Cậu là ánh sáng của tớ ✨", "Yêu cậu không lối thoát", "Cậu là cả thế giới 🌍",
+            "Bé ngoan ăn nhiều vào nha", "Thương thương ❤️", "Cục nợ đáng yêu",
+            "Yêu cậu nhất hệ mặt trời ☀️"
         ],
         male: [
             "Nhớ cậu quá àaa 🥺", "Yêu cậu 3000 ❤️", "Đẹp trai quá nhe 😎",
             "Ngầu quá đi!", "Chàng trai của tớ", "Moahzz 😘",
-            "Cậu là tuyệt nhất", "Cười cái coi nào 😁", "Yêu cậu mất rồi 💙"
+            "Cậu là tuyệt nhất", "Cười cái coi nào 😁", "Yêu cậu mất rồi 💙",
+            "Anh người yêu xịn xò", "Hoàng tử của tớ 👑", "Nhớ anh nhiều",
+            "Cậu là superman 💪", "Thương cậu lắm á", "Đồ đáng yêu 🥰",
+            "Mê cậu quá đi", "Chồng iu của tớ", "Cậu là số 1 🥇",
+            "Yêu anh nhất", "Cậu ấm áp lắm", "Bên cậu tớ thấy an toàn",
+            "Người hùng của tớ 🦸‍♂️", "Soái ca trong lòng tớ", "Love you to the moon 🌙",
+            "Cậu là định mệnh của tớ", "Yêu anh không hối tiếc", "Cậu giỏi lắm 👍",
+            "Tự hào về cậu", "Chàng trai năm 17 tuổi", "Yêu cậu nhất trần đời",
+            "Cậu là tất cả 💙"
         ]
     },
     slideImages: [
@@ -172,7 +188,9 @@ function setupCreatorMode() {
     elements.mainContent?.classList.add('hidden');
 
     // Dynamic theme preview based on gender
+    // Dynamic theme preview based on gender
     elements.genderSelect?.addEventListener('change', (e) => {
+        state.genderParam = e.target.value;
         if (e.target.value === 'm') {
             document.body.classList.add('theme-blue');
             state.currentTheme = 'blue';
