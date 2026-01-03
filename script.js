@@ -27,6 +27,8 @@ const elements = {
     genderSelect: document.getElementById('gender-select'),
     generatedLinkInput: document.getElementById('generated-link'),
     resultArea: document.getElementById('result-area'),
+    qrCodeContainer: document.getElementById('qr-code-container'),
+    downloadQrBtn: document.getElementById('download-qr-btn'),
 
     // Display elements
     greeting: document.getElementById('greeting'),
@@ -227,6 +229,9 @@ function setupCreatorMode() {
 
     // Copy button
     elements.copyBtn?.addEventListener('click', copyLink);
+
+    // Download QR button
+    elements.downloadQrBtn?.addEventListener('click', downloadQRCode);
 
     // Go to link button
     elements.goToLinkBtn?.addEventListener('click', () => {
@@ -531,6 +536,7 @@ function createLink() {
         elements.generatedLinkInput.value = fullUrl;
     }
 
+    generateQRCode(fullUrl);
     elements.resultArea?.classList.remove('hidden');
     elements.createLinkBtn?.classList.add('hidden');
 
@@ -797,12 +803,61 @@ function showToast(message) {
     `;
     toast.textContent = message;
     document.body.appendChild(toast);
-
     setTimeout(() => {
         toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
         setTimeout(() => toast.remove(), 300);
-    }, 2000);
+    }, 3000);
+}
+
+// ========== QR CODE ==========
+function generateQRCode(url) {
+    const qrContainer = document.getElementById('qr-code');
+    if (!qrContainer) return;
+
+    qrContainer.innerHTML = ''; // Clear existing
+
+    // Show container
+    if (elements.qrCodeContainer) {
+        elements.qrCodeContainer.classList.remove('hidden');
+    }
+
+    // Generate QR
+    new QRCode(qrContainer, {
+        text: url,
+        width: 180,
+        height: 180,
+        colorDark: "#590d22",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
+
+function downloadQRCode() {
+    const qrContainer = document.getElementById('qr-code');
+    const img = qrContainer?.querySelector('img');
+
+    if (img && img.src) {
+        const link = document.createElement('a');
+        link.download = 'loi-to-tinh-qr.png';
+        link.href = img.src;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast('Đã tải mã QR! 📸');
+    } else {
+        showToast('Đang tạo mã QR, đợi xíu nha...');
+        // Fallback for canvas if img not ready (qrcodejs uses canvas first then img)
+        const canvas = qrContainer?.querySelector('canvas');
+        if (canvas) {
+            const link = document.createElement('a');
+            link.download = 'loi-to-tinh-qr.png';
+            link.href = canvas.toDataURL();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('Đã tải mã QR! 📸');
+        }
+    }
 }
 
 // ========== START APP ==========
