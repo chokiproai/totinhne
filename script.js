@@ -48,8 +48,7 @@ const elements = {
     // Containers
     heartsContainer: document.getElementById('hearts-container'),
 
-    // Counter
-    loveDays: document.getElementById('love-days'),
+
     giftBox: document.querySelector('.gift-box')
 };
 
@@ -98,7 +97,18 @@ const CONFIG = {
         "img/bear_hug.gif",
         "img/heart.gif"
     ],
-    base64Fallback: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmNGQ2ZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+"
+    base64Fallback: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmNGQ2ZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+",
+    wishes: [
+        { icon: "❤️", text: "Cảm ơn cậu vì đã đồng ý bên tớ" },
+        { icon: "👵👴", text: "Cùng nhau già đi cậu nhé?" },
+        { icon: "🏠", text: "Mọi bão giông bên ngoài cứ để tớ lo" },
+        { icon: "✨", text: "Tớ hứa sẽ trân trọng cậu mỗi ngày" },
+        { icon: "🧸", text: "Bờ vai này luôn dành cho cậu tựa vào" },
+        { icon: "🌍", text: "Với tớ, cậu quan trọng hơn cả thế giới" },
+        { icon: "🥰", text: "Chỉ cần thấy cậu cười là tớ vui rồi" },
+        { icon: "🤝", text: "Nắm tay tớ đi hết đoạn đường đời nhé" },
+        { icon: "💌", text: "Yêu cậu hôm nay, ngày mai và mãi mãi" }
+    ]
 };
 
 // ========== STATE ==========
@@ -174,8 +184,7 @@ function setupRecipientMode(urlParams) {
     // Start slideshow
     startMainSlideshow();
 
-    // Check if already said yes (update counter)
-    checkExistingLoveDate();
+
 }
 
 function setupCreatorMode() {
@@ -357,9 +366,10 @@ function handleYesClick() {
     // Start success slideshow
     startSuccessSlideshow();
 
-    // Save love date and update counter
-    saveLoveDate();
-    updateLoveCounter();
+    // Init wishes
+    initWishes();
+
+
 }
 
 function moveBtnNo() {
@@ -396,68 +406,103 @@ function moveBtnNo() {
     btn.innerHTML = `<i class="fas fa-times"></i> ${phrases[Math.floor(Math.random() * phrases.length)]}`;
 }
 
-// ========== LOVE COUNTER ==========
-/*
- * CÁCH TÍNH NGÀY YÊU:
- * - Khi người nhận click "Đồng ý", thời điểm đó được lưu vào localStorage
- * - Key lưu theo format: loveDate_{tên người nhận}
- * - Mỗi lần load trang, hệ thống tính số ngày từ ngày đó đến hiện tại
- * - localStorage hoạt động trên GitHub Pages (và mọi website)
- * - Dữ liệu lưu trên trình duyệt của người dùng, không mất khi refresh
- */
+// ========== SWIPEABLE WISHES ==========
+function initWishes() {
+    const stack = document.getElementById('card-stack');
+    if (!stack) return;
 
-function saveLoveDate() {
-    const key = `loveDate_${state.toName}`;
-    if (!localStorage.getItem(key)) {
-        // Lưu thời điểm hiện tại dưới dạng ISO string
-        localStorage.setItem(key, new Date().toISOString());
-    }
+    // Clear existing
+    stack.innerHTML = '';
+
+    // Reverse to stack correctly (last in DOM is top)
+    const cards = [...CONFIG.wishes].reverse();
+
+    cards.forEach(wish => {
+        const card = document.createElement('div');
+        card.className = 'wish-card';
+        card.innerHTML = `
+            <div class="wish-icon">${wish.icon}</div>
+            <div class="wish-content">${wish.text}</div>
+        `;
+        stack.appendChild(card);
+
+        // Add events
+        addSwipeEvents(card);
+    });
 }
 
-function checkExistingLoveDate() {
-    const key = `loveDate_${state.toName}`;
-    const savedDate = localStorage.getItem(key);
+function addSwipeEvents(card) {
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
 
-    if (savedDate) {
-        // Nếu đã từng click Đồng ý, hiện luôn success section
-        if (elements.askSection) elements.askSection.style.display = 'none';
-        if (elements.successSection) elements.successSection.style.display = 'block';
-        updateLoveCounter();
-        startSuccessSlideshow();
-    }
-}
+    const handleStart = (e) => {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        card.classList.add('moving');
+    };
 
-function updateLoveCounter() {
-    const key = `loveDate_${state.toName}`;
-    const savedDate = localStorage.getItem(key);
+    const handleMove = (e) => {
+        if (!isDragging) return;
 
-    if (savedDate && elements.loveDays) {
-        const startDate = new Date(savedDate);
-        const now = new Date();
+        const x = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        currentX = x - startX;
 
-        // Tính số milliseconds giữa 2 ngày
-        const diffTime = Math.abs(now - startDate);
+        // Rotate and move
+        const rotate = currentX * 0.05;
+        card.style.transform = `translateX(${currentX}px) rotate(${rotate}deg)`;
 
-        // Chuyển sang số ngày (1000ms * 60s * 60m * 24h = 1 ngày)
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        // Fade opacity slightly if moving far
+        const opacity = 1 - Math.abs(currentX) / 500;
+        card.style.opacity = opacity;
+    };
 
-        // Animate counter
-        animateCounter(elements.loveDays, diffDays);
-    }
-}
+    const handleEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.classList.remove('moving');
 
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = Math.max(1, Math.floor(target / 30));
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            current = target;
-            clearInterval(timer);
+        const threshold = 100; // px to dismiss
+
+        if (Math.abs(currentX) > threshold) {
+            // Swipe away
+            const direction = currentX > 0 ? 1 : -1;
+            const endX = window.innerWidth * direction;
+
+            card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+            card.style.transform = `translateX(${endX}px) rotate(${direction * 30}deg)`;
+            card.style.opacity = '0';
+
+            setTimeout(() => {
+                card.remove();
+                // Check if empty, maybe reload stack or show special message?
+                // For now just loop reuse if needed, or leave empty
+                if (document.querySelectorAll('.wish-card').length === 0) {
+                    // Reload stack for endless fun
+                    setTimeout(initWishes, 500);
+                }
+            }, 500);
+        } else {
+            // Reset
+            card.style.transform = '';
+            card.style.opacity = '';
         }
-        element.textContent = current;
-    }, 40);
+
+        currentX = 0;
+    };
+
+    // Touch events
+    card.addEventListener('touchstart', handleStart, { passive: true });
+    card.addEventListener('touchmove', handleMove, { passive: true });
+    card.addEventListener('touchend', handleEnd);
+
+    // Mouse events
+    card.addEventListener('mousedown', handleStart);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleEnd);
 }
+
+
 
 // ========== LINK CREATION ==========
 function createLink() {

@@ -645,53 +645,7 @@ textarea.form-control {
     transition: opacity 1s ease;
 }
 
-/* ========== LOVE COUNTER ========== */
-.love-counter {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-md) var(--spacing-lg);
-    margin: var(--spacing-lg) 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    animation: fadeIn 0.5s ease;
-}
 
-.counter-icon {
-    font-size: 2.5rem;
-    animation: heartbeat 1.5s infinite;
-}
-
-.counter-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.counter-label {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-weight: 500;
-}
-
-.counter-value {
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.counter-unit {
-    font-size: 1.1rem;
-    color: var(--text-color);
-    font-weight: 600;
-}
 
 /* ========== SUCCESS SECTION ========== */
 .success-message {
@@ -1209,4 +1163,124 @@ textarea.form-control {
 /* ========== HIDDEN UTILITY ========== */
 .hidden {
     display: none !important;
+}
+
+/* ========== SWIPEABLE CARDS ========== */
+.wishes-container {
+    position: relative;
+    width: 100%;
+    margin: var(--spacing-lg) auto;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-stack {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    height: 200px;
+}
+
+.wish-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #ffffff, #fff0f3);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 5px 15px rgba(255, 77, 109, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transform-origin: 50% 100%;
+    overflow: hidden;
+}
+
+.wish-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 60%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.wish-card:nth-last-child(1) {
+    transform: scale(1) translateY(0) rotate(0deg);
+    z-index: 3;
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.12),
+        0 10px 20px rgba(255, 77, 109, 0.15);
+}
+
+.wish-card:nth-last-child(2) {
+    transform: scale(0.96) translateY(12px);
+    opacity: 0.7;
+    z-index: 2;
+    filter: brightness(0.95);
+}
+
+.wish-card:nth-last-child(3) {
+    transform: scale(0.92) translateY(24px);
+    opacity: 0.4;
+    z-index: 1;
+    filter: brightness(0.9);
+}
+
+.wish-card:nth-last-child(n+4) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wish-card.moving {
+    transition: none;
+    cursor: grabbing;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.wish-icon {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    transform: translateZ(20px);
+}
+
+.wish-content {
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.4;
+    color: var(--text-color);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(255, 77, 109, 0.1);
+    padding: 0 10px;
+    transform: translateZ(10px);
+}
+
+.instruction {
+    text-align: center;
+    margin-top: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0.7;
+    animation: fadeIn 1s ease 1s backwards;
 }
