@@ -1304,9 +1304,10 @@ textarea.form-control {
 #qr-code-container {
     margin-top: 1.5rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: row; /* Change to row to put button on side */
+    align-items: center; /* Center vertically */
+    justify-content: center;
+    gap: 1.5rem; /* Increase gap slightly */
     animation: fadeIn 0.5s ease;
 }
 
