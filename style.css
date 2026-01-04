@@ -1307,20 +1307,24 @@ textarea.form-control {
     flex-direction: row; /* Change to row to put button on side */
     align-items: center; /* Center vertically */
     justify-content: center;
-    gap: 1.5rem; /* Increase gap slightly */
+    gap: 1rem; /* Reduce gap to fit better */
     animation: fadeIn 0.5s ease;
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
 }
 
 #qr-code {
     background: white;
-    padding: 10px;
+    padding: 8px; /* Reduce padding */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 150px; /* Limit size on mobile */
 }
 
-#qr-code img {
+#qr-code img, #qr-code canvas {
     border-radius: 8px;
     display: block;
+    width: 100%; /* Make responsive */
+    height: auto;
 }
 
 .btn-sm {
