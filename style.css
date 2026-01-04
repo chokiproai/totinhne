@@ -563,14 +563,14 @@ textarea.form-control {
 }
 
 /* ========== SHARE BUTTONS ========== */
-.share-buttons {
+.action-buttons {
     display: flex;
     justify-content: center;
     gap: 12px;
     margin-bottom: var(--spacing-md);
 }
 
-.share-btn {
+.action-btn {
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -584,31 +584,31 @@ textarea.form-control {
     justify-content: center;
 }
 
-.share-btn:hover {
+.action-btn:hover {
     transform: translateY(-5px) scale(1.1);
 }
 
-.share-fb {
+.action-fb {
     background: linear-gradient(135deg, #1877f2, #3b5998);
 }
 
-.share-fb:hover {
+.action-fb:hover {
     box-shadow: 0 8px 25px rgba(24, 119, 242, 0.5);
 }
 
-.share-messenger {
+.action-messenger {
     background: linear-gradient(135deg, #00b2ff, #006aff);
 }
 
-.share-messenger:hover {
+.action-messenger:hover {
     box-shadow: 0 8px 25px rgba(0, 178, 255, 0.5);
 }
 
-.share-zalo {
+.action-zalo {
     background: linear-gradient(135deg, #0068ff, #0044cc);
 }
 
-.share-zalo:hover {
+.action-zalo:hover {
     box-shadow: 0 8px 25px rgba(0, 104, 255, 0.5);
 }
 
@@ -617,11 +617,11 @@ textarea.form-control {
     font-size: 1.3rem;
 }
 
-.share-native {
+.action-native {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
 }
 
-.share-native:hover {
+.action-native:hover {
     box-shadow: 0 8px 25px rgba(255, 77, 109, 0.5);
 }
 
@@ -668,11 +668,11 @@ textarea.form-control {
     animation: fadeIn 0.5s ease;
 }
 
-.share-success {
+.action-success {
     margin-top: var(--spacing-md);
 }
 
-.share-success p {
+.action-success p {
     color: var(--text-light);
     font-size: 0.9rem;
     margin-bottom: 10px;

@@ -35,12 +35,12 @@ const elements = {
     questionText: document.getElementById('question-text'),
 
     // Share buttons
-    shareFb: document.getElementById('share-fb'),
-    shareZalo: document.getElementById('share-zalo'),
-    shareMessenger: document.getElementById('share-messenger'),
-    shareNative: document.getElementById('share-native'),
-    shareSuccessFb: document.getElementById('share-success-fb'),
-    shareSuccessNative: document.getElementById('share-success-native'),
+    actionFb: document.getElementById('action-fb'),
+    actionZalo: document.getElementById('action-zalo'),
+    actionMessenger: document.getElementById('action-messenger'),
+    actionNative: document.getElementById('action-native'),
+    actionSuccessFb: document.getElementById('action-success-fb'),
+    actionSuccessNative: document.getElementById('action-success-native'),
 
     // Media
     bgMusic: document.getElementById('bg-music'),
@@ -148,7 +148,9 @@ function init() {
     // Initialize features
     initMusic();
     initEffects();
-    initShareButtons();
+    initMusic();
+    initEffects();
+    initActionButtons();
 
     // Hide loading screen
     setTimeout(() => {
@@ -571,27 +573,27 @@ function copyLink() {
 }
 
 // ========== SHARE BUTTONS ==========
-function initShareButtons() {
+function initActionButtons() {
     const shareUrl = () => elements.generatedLinkInput?.value || window.location.href;
     const shareTitle = 'Gửi cậu người thương ❤️';
     const shareText = 'Ai đó muốn gửi lời yêu thương đến bạn...';
 
     // Facebook
-    elements.shareFb?.addEventListener('click', () => {
+    elements.actionFb?.addEventListener('click', () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl())}`, '_blank', 'width=600,height=400');
     });
 
-    elements.shareSuccessFb?.addEventListener('click', () => {
+    elements.actionSuccessFb?.addEventListener('click', () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400');
     });
 
     // Zalo
-    elements.shareZalo?.addEventListener('click', () => {
+    elements.actionZalo?.addEventListener('click', () => {
         window.open(`https://zalo.me/share?url=${encodeURIComponent(shareUrl())}`, '_blank');
     });
 
     // Messenger
-    elements.shareMessenger?.addEventListener('click', () => {
+    elements.actionMessenger?.addEventListener('click', () => {
         window.open(`fb-messenger://share?link=${encodeURIComponent(shareUrl())}`, '_blank');
     });
 
@@ -608,8 +610,8 @@ function initShareButtons() {
         }
     };
 
-    elements.shareNative?.addEventListener('click', handleNativeShare);
-    elements.shareSuccessNative?.addEventListener('click', handleNativeShare);
+    elements.actionNative?.addEventListener('click', handleNativeShare);
+    elements.actionSuccessNative?.addEventListener('click', handleNativeShare);
 }
 
 // ========== EFFECTS ==========
