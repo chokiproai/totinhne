@@ -668,14 +668,17 @@ textarea.form-control {
     animation: fadeIn 0.5s ease;
 }
 
-.action-success {
-    margin-top: var(--spacing-md);
+/* Create your own link section */
+.create-your-own {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.action-success p {
+.create-your-own p {
     color: var(--text-light);
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-sm);
 }
 
 /* ========== MUSIC BUTTON ========== */
@@ -1304,26 +1307,34 @@ textarea.form-control {
 #qr-code-container {
     margin-top: 1.5rem;
     display: flex;
-    flex-direction: row; /* Change to row to put button on side */
-    align-items: center; /* Center vertically */
+    flex-direction: row;
+    /* Change to row to put button on side */
+    align-items: center;
+    /* Center vertically */
     justify-content: center;
-    gap: 1rem; /* Reduce gap to fit better */
+    gap: 1rem;
+    /* Reduce gap to fit better */
     animation: fadeIn 0.5s ease;
-    flex-wrap: wrap; /* Allow wrapping on very small screens */
+    flex-wrap: wrap;
+    /* Allow wrapping on very small screens */
 }
 
 #qr-code {
     background: white;
-    padding: 8px; /* Reduce padding */
+    padding: 8px;
+    /* Reduce padding */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 150px; /* Limit size on mobile */
+    max-width: 150px;
+    /* Limit size on mobile */
 }
 
-#qr-code img, #qr-code canvas {
+#qr-code img,
+#qr-code canvas {
     border-radius: 8px;
     display: block;
-    width: 100%; /* Make responsive */
+    width: 100%;
+    /* Make responsive */
     height: auto;
 }
 

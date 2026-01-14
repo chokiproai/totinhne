@@ -39,8 +39,6 @@ const elements = {
     actionZalo: document.getElementById('action-zalo'),
     actionMessenger: document.getElementById('action-messenger'),
     actionNative: document.getElementById('action-native'),
-    actionSuccessFb: document.getElementById('action-success-fb'),
-    actionSuccessNative: document.getElementById('action-success-native'),
 
     // Media
     bgMusic: document.getElementById('bg-music'),
@@ -576,42 +574,58 @@ function copyLink() {
 function initActionButtons() {
     const shareUrl = () => elements.generatedLinkInput?.value || window.location.href;
     const shareTitle = 'Gửi cậu người thương ❤️';
-    const shareText = 'Ai đó muốn gửi lời yêu thương đến bạn...';
 
     // Facebook
-    elements.actionFb?.addEventListener('click', () => {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl())}`, '_blank', 'width=600,height=400');
-    });
-
-    elements.actionSuccessFb?.addEventListener('click', () => {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400');
+    elements.actionFb?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = shareUrl();
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
     });
 
     // Zalo
-    elements.actionZalo?.addEventListener('click', () => {
-        window.open(`https://zalo.me/share?url=${encodeURIComponent(shareUrl())}`, '_blank');
+    elements.actionZalo?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = shareUrl();
+        window.open(`https://zalo.me/share?url=${encodeURIComponent(url)}`, '_blank');
     });
 
     // Messenger
-    elements.actionMessenger?.addEventListener('click', () => {
-        window.open(`fb-messenger://share?link=${encodeURIComponent(shareUrl())}`, '_blank');
+    elements.actionMessenger?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = shareUrl();
+        window.open(`fb-messenger://share?link=${encodeURIComponent(url)}`, '_blank');
     });
 
-    // Native share
-    const handleNativeShare = () => {
-        if (navigator.share) {
-            navigator.share({
-                title: shareTitle,
-                text: shareText,
-                url: shareUrl()
-            }).catch(() => { });
-        } else {
-            copyLink();
-        }
-    };
+    // Native share - chỉ copy URL
+    elements.actionNative?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = shareUrl();
 
-    elements.actionNative?.addEventListener('click', handleNativeShare);
-    elements.actionSuccessNative?.addEventListener('click', handleNativeShare);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Đã copy link! 📋');
+            }).catch(() => {
+                fallbackCopyUrl(url);
+            });
+        } else {
+            fallbackCopyUrl(url);
+        }
+    });
+
+    function fallbackCopyUrl(url) {
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        textarea.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Đã copy link! 📋');
+        } catch (err) {
+            showToast('Không thể copy!');
+        }
+        document.body.removeChild(textarea);
+    }
 }
 
 // ========== EFFECTS ==========
