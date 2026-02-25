@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Merry Christmas 🎄</title>
+
+    <!-- GPU Optimization Meta Tags -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="force-rendering" content="webkit">
+    <meta name="gpu-acceleration" content="enabled">
+    <meta name="hardware-acceleration" content="enabled">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js & MediaPipe Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+                "@mediapipe/tasks-vision": "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/+esm"
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="loader-text">Đang tải...</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer">
+        <h1>Merry Christmas</h1>
+
+        <div class="upload-wrapper">
+            <label class="upload-btn">
+                Thêm Ảnh
+                <input type="file" id="file-input" multiple accept="image/*">
+            </label>
+            <div class="hint-text" id="hint-text"></div>
+        </div>
+    </div>
+
+    <div id="webcam-wrapper">
+        <video id="webcam" autoplay playsinline></video>
+        <canvas id="webcam-preview" style="display:none;"></canvas>
+    </div>
+
+    <!-- Christmas Card -->
+    <div id="christmas-card">
+        <div class="card-title">🎄 Merry Christmas 🎄</div>
+        <div class="card-message">
+            Chúc bạn một mùa Giáng Sinh<br>
+            an lành, hạnh phúc và tràn đầy niềm vui.<br><br>
+            May your days be merry and bright! ✨
+        </div>
+        <button class="card-close" id="card-close-btn">Đóng</button>
+    </div>
+
+    <!-- Guide Overlay -->
+    <div id="guide-overlay">
+        <div class="guide-content">
+            <div class="guide-title">📖 Hướng Dẫn Sử Dụng</div>
+
+            <div class="guide-section">
+                <h3><span>👆</span> Cảm ứng / Chuột</h3>
+                <div class="guide-item">Kéo để xoay cây thông</div>
+                <div class="guide-item">Pinch (2 ngón) / Scroll để zoom</div>
+            </div>
+
+            <div class="guide-divider"></div>
+
+            <div class="guide-section">
+                <h3><span>📸</span> Ảnh kỷ niệm</h3>
+                <div class="guide-item">Nhấn "Thêm Ảnh" để thêm ảnh lên cây</div>
+                <div class="guide-item">Ảnh sẽ hiển thị quấn quanh cây thông</div>
+            </div>
+
+            <div class="guide-divider"></div>
+
+            <div class="guide-section" id="guide-keyboard-section">
+                <h3><span>⌨️</span> Phím tắt (Máy tính)</h3>
+                <div class="guide-item"><b>H</b> — Ẩn/hiện giao diện</div>
+                <div class="guide-item"><b>R</b> — Bật/tắt tự xoay</div>
+                <div class="guide-item"><b>Space</b> — Reset góc nhìn</div>
+            </div>
+
+            <div class="guide-divider"></div>
+
+            <div class="guide-section">
+                <h3><span>✋</span> Điều khiển bằng tay (Webcam)</h3>
+                <div class="guide-item">Nắm tay → Hiện cây thông</div>
+                <div class="guide-item">Xòe tay → Bung hiệu ứng</div>
+                <div class="guide-item">Chụm ngón tay → Xem ảnh</div>
+            </div>
+
+            <div class="guide-divider"></div>
+
+            <div class="guide-section">
+                <h3><span>🎵</span> Nhạc nền</h3>
+                <div class="guide-item">Nhấn nút ▶ góc phải bên dưới để bật nhạc</div>
+            </div>
+
+            <div class="guide-divider"></div>
+
+            <div class="guide-section">
+                <h3><span>🎆</span> Pháo Hoa</h3>
+                <div class="guide-item">Double-click (PC) hoặc giữ lâu (Mobile) để bắn pháo hoa</div>
+            </div>
+
+            <div class="guide-divider"></div>
+
+            <div class="guide-section">
+                <h3><span>🏮</span> Đèn Ước</h3>
+                <div class="guide-item">Nhấn nút ☆ góc trái bên dưới để thả đèn ước</div>
+                <div class="guide-item">Viết điều ước → thả lên trời!</div>
+            </div>
+
+            <button class="guide-close-btn" id="guide-close-btn">Bắt Đầu 🎄</button>
+        </div>
+    </div>
+
+    <!-- Guide Button -->
+    <div id="guide-btn" title="Hướng dẫn">?</div>
+
+    <!-- Wish Lantern Button -->
+    <div id="wish-btn" title="Thả đèn ước">☆</div>
+
+    <!-- Wish Modal -->
+    <div id="wish-modal">
+        <h3>🏮 Thả Đèn Ước 🏮</h3>
+        <input type="text" id="wish-input" placeholder="Nhập điều ước của bạn..." maxlength="60" autocomplete="off">
+        <br>
+        <button id="wish-send">Thả Lên Trời ✨</button>
+    </div>
+
+    <!-- Countdown -->
+    <div id="countdown-wrapper">
+        <div id="countdown-label">Đếm ngược đến Giáng Sinh</div>
+        <div id="countdown-timer">--:--:--:--</div>
+    </div>
+
+    <!-- Music Control -->
+    <div id="music-control" title="Bật/Tắt Nhạc">
+        <svg id="music-icon-play" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+        </svg>
+        <svg id="music-icon-pause" viewBox="0 0 24 24" style="display:none;">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+        </svg>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/audio/2024/11/29/audio_f0c0e06965.mp3" type="audio/mpeg">
+    </audio>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

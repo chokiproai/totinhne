@@ -3,227 +3,237 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gửi cậu người thương</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Trang web tỏ tình lãng mạn - Gửi lời yêu thương đến người ấy">
-    <meta name="keywords" content="tỏ tình, yêu thương, romantic, love confession">
-    <meta name="author" content="Ngọc Tuấn">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Gửi cậu người thương ❤️">
-    <meta property="og:description" content="Ai đó muốn gửi lời yêu thương đến bạn...">
-    <meta property="og:image" content="img/og-image.png">
-
-    <!-- PWA Support -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ff4d6d">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="img/icon-192.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tỏ Tình Nè ❤️</title>
+    <meta name="description" content="Gửi yêu thương qua từng dòng code — Tỏ tình, 3D Heart, Christmas Tree">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        body {
+            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
+            background: #0a0a1a;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        /* Ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 77, 109, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(100, 100, 255, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: ambientDrift 20s ease-in-out infinite;
+        }
+
+        @keyframes ambientDrift {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-20px, -10px);
+            }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff, #ff758f, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 960px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 40px var(--glow);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.6;
+        }
+
+        .card-arrow {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .card:hover .card-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* Per-card accent colors */
+        .card--confession {
+            --accent: #ff4d6d;
+            --glow: rgba(255, 77, 109, 0.15);
+        }
+
+        .card--heart {
+            --accent: #ff758f;
+            --glow: rgba(255, 117, 143, 0.15);
+        }
+
+        .card--christmas {
+            --accent: #ffd700;
+            --glow: rgba(255, 215, 0, 0.12);
+        }
+
+        .footer {
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #ff758f;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <h1>Tỏ Tình Nè ❤️</h1>
+    <p class="subtitle">Gửi yêu thương qua từng dòng code</p>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader">
-            <div class="heart-loader">❤️</div>
-            <p>Đang tải...</p>
-        </div>
+    <div class="grid">
+        <a href="confession/" class="card card--confession">
+            <span class="card-icon">💌</span>
+            <div class="card-title">Tỏ Tình</div>
+            <div class="card-desc">Trang web tỏ tình lãng mạn — tạo link gửi lời yêu thương đến người ấy</div>
+            <span class="card-arrow">→</span>
+        </a>
+
+        <a href="3d-heart/" class="card card--heart">
+            <span class="card-icon">💖</span>
+            <div class="card-title">Celestial Heart</div>
+            <div class="card-desc">Trái tim 3D hạt phát sáng — vuốt để xoay, chạm để phân tán</div>
+            <span class="card-arrow">→</span>
+        </a>
+
+        <a href="christmas/" class="card card--christmas">
+            <span class="card-icon">🎄</span>
+            <div class="card-title">Merry Christmas</div>
+            <div class="card-desc">Cây thông 3D với pháo hoa, đèn ước, ông già Noel bay ngang</div>
+            <span class="card-arrow">→</span>
+        </a>
     </div>
 
-    <!-- Cinematic Entrance Overlay -->
-    <div id="entrance-overlay">
-        <div class="gift-container">
-            <div class="gift-box">
-                <div class="click-area"></div>
-                <div class="lid">
-                    <div class="lid-shadow"></div>
-                    <div class="ribbon-v"></div>
-                    <div class="ribbon-h"></div>
-                </div>
-                <div class="box-body">
-                    <div class="box-shadow"></div>
-                    <div class="ribbon-body"></div>
-                </div>
-            </div>
-            <p class="hint-text">Chạm để mở quà 🎁</p>
-        </div>
-    </div>
-
-    <!-- Ambient Background Shapes -->
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-    <div class="shape shape-4"></div>
-
-    <!-- Floating Hearts Container -->
-    <div class="hearts-container" id="hearts-container"></div>
-
-    <!-- Theme sẽ tự động theo giới tính (Pink cho nữ, Blue cho nam) -->
-
-    <!-- Setup Modal (Creator Mode) -->
-    <div id="setup-modal" class="modal">
-        <div class="card modal-content">
-            <h1><i class="fas fa-heart"></i> Tạo lời tỏ tình</h1>
-            <p class="subtitle">Nhập tên người ấy để tạo trang web riêng nhé!</p>
-
-            <div class="form-group">
-                <label><i class="fas fa-user"></i> Gửi cho:</label>
-                <select id="gender-select" class="form-control">
-                    <option value="f">💝 Bạn Nữ</option>
-                    <option value="m">💙 Bạn Nam</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label><i class="fas fa-signature"></i> Tên người ấy:</label>
-                <input type="text" id="lover-name" class="form-control" placeholder="Ví dụ: Bé Mèo, Crush..."
-                    autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label><i class="fas fa-pen-fancy"></i> Lời nhắn nhủ:</label>
-                <textarea id="custom-msg" class="form-control" rows="3"
-                    placeholder="Mặc định: Tớ thích cậu từ lâu lắm rồi..."></textarea>
-            </div>
-
-            <button class="btn btn-yes btn-large" id="create-link-btn">
-                <i class="fas fa-magic"></i> Tạo Link
-            </button>
-
-            <div id="result-area" class="hidden">
-                <p class="result-label">Link của bạn nè:</p>
-                <div class="link-box">
-                    <input type="text" id="generated-link" readonly>
-                    <button id="copy-btn"><i class="fas fa-copy"></i></button>
-                </div>
-
-                <!-- QR Code Section -->
-                <div id="qr-code-container" class="hidden">
-                    <div id="qr-code"></div>
-                    <button class="btn btn-sm" id="download-qr-btn">
-                        <i class="fas fa-download"></i> Tải QR Code
-                    </button>
-                </div>
-
-
-
-                <!-- Share Buttons -->
-                <div class="action-buttons">
-                    <button class="action-btn action-fb" id="action-fb" title="Chia sẻ Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
-                    <button class="action-btn action-zalo" id="action-zalo" title="Chia sẻ Zalo">
-                        <span class="zalo-icon">Z</span>
-                    </button>
-                    <button class="action-btn action-messenger" id="action-messenger" title="Gửi Messenger">
-                        <i class="fab fa-facebook-messenger"></i>
-                    </button>
-                    <button class="action-btn action-native" id="action-native" title="Chia sẻ khác">
-                        <i class="fas fa-share-alt"></i>
-                    </button>
-                </div>
-
-                <button class="btn btn-yes" id="go-to-link-btn">
-                    <i class="fas fa-eye"></i> Xem thử ngay
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Background Music -->
-    <audio id="bg-music" loop>
-        <source src="bg-music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Music Toggle Button -->
-    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc">
-        <i class="fas fa-music"></i>
-    </button>
-
-    <!-- Main Confession Content -->
-    <div class="container hidden" id="main-content">
-        <div class="card">
-            <div id="ask-section">
-                <div class="gif-container">
-                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Q0ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5ZGIzN2E5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/cLS1cfxvGOPVpf9g3y/giphy.gif"
-                        alt="Cute animated bear" id="main-image" loading="lazy">
-                </div>
-                <!-- Dynamic Name will be inserted here -->
-                <h1 id="greeting">Gửi cậu người thương</h1>
-                <p class="subtitle typing-cursor" id="question-text"></p>
-
-                <div class="btn-group">
-                    <button class="btn btn-yes" id="btn-yes">
-                        <i class="fas fa-heart"></i> Đồng ý
-                    </button>
-                    <button class="btn btn-no" id="btn-no">
-                        <i class="fas fa-times"></i> Không nha
-                    </button>
-                </div>
-            </div>
-
-            <div id="success-section" class="success-message">
-                <div class="gif-container">
-                    <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif?cid=ecf05e478206d4o856187788106295325016201004128522&rid=giphy.gif&ct=s"
-                        alt="Celebration" id="success-image" loading="lazy">
-                </div>
-                <h1 id="success-title">Yeahhh! Tớ biết mà! ❤️</h1>
-                <p class="subtitle">Hôm nay là ngày đẹp nhất đời tớ. Yêu cậu nhiều lắm!</p>
-
-
-                <!-- Swipeable Wishes Cards -->
-                <div class="wishes-container">
-                    <div id="card-stack" class="card-stack"></div>
-                    <p class="instruction">Vuốt để xem tiếp 👉</p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer Credits -->
     <div class="footer">
-        <div class="footer-content">
-            <span>Made with ❤️ by</span>
-            <a href="https://www.facebook.com/share/1AkHwaJZTu/" target="_blank">Ngọc Tuấn</a>
-            <span class="divider">|</span>
-            <a href="https://github.com/chokiproai/totinhne" target="_blank">
-                <i class="fab fa-github"></i> Source
-            </a>
-        </div>
+        Made with ❤️ by <a href="https://www.facebook.com/share/1AkHwaJZTu/" target="_blank">Ngọc Tuấn</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/chokiproai/totinhne" target="_blank">GitHub</a>
     </div>
-
-    <!-- Canvas Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="script.js"></script>
-
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(() => { });
-            });
-        }
-    </script>
 </body>
 
 </html>

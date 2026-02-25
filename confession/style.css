@@ -668,6 +668,110 @@ textarea.form-control {
     animation: fadeIn 0.5s ease;
 }
 
+/* ── Celestial Heart Link Button ── */
+.celestial-heart-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: var(--spacing-lg);
+    padding: 16px 22px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(30, 5, 30, 0.85), rgba(80, 10, 50, 0.85));
+    border: 1px solid rgba(255, 120, 180, 0.3);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+    box-shadow: 0 4px 20px rgba(255, 77, 109, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: celestialPulse 3s ease-in-out infinite;
+}
+
+.celestial-heart-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 200, 0.15), transparent);
+    animation: celestialShimmer 3s ease-in-out infinite;
+}
+
+@keyframes celestialShimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes celestialPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 20px rgba(255, 77, 109, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 6px 30px rgba(255, 77, 109, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+}
+
+.celestial-heart-link:hover,
+.celestial-heart-link:active {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(255, 77, 109, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 120, 180, 0.5);
+}
+
+.celestial-heart-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 8px rgba(255, 100, 150, 0.6));
+    animation: heartbeat 2s infinite;
+    flex-shrink: 0;
+}
+
+.celestial-heart-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+}
+
+.celestial-heart-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 120, 180, 0.5);
+    letter-spacing: 0.02em;
+}
+
+.celestial-heart-sub {
+    font-size: 0.78rem;
+    color: rgba(255, 200, 220, 0.7);
+    font-weight: 300;
+    margin-top: 2px;
+}
+
+.celestial-heart-arrow {
+    font-size: 1.4rem;
+    color: rgba(255, 150, 200, 0.6);
+    transition: transform 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.celestial-heart-link:hover .celestial-heart-arrow {
+    transform: translateX(5px);
+    color: rgba(255, 200, 230, 0.9);
+}
+
 /* Create your own link section */
 .create-your-own {
     margin-top: var(--spacing-lg);
@@ -680,6 +784,7 @@ textarea.form-control {
     font-size: 0.95rem;
     margin-bottom: var(--spacing-sm);
 }
+
 
 /* ========== MUSIC BUTTON ========== */
 .music-btn {

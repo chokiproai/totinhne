@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Celestial Heart</title>
+  <meta name="description" content="A 3D Heart Particle Experience — Touch or press Space to interact" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Three.js via CDN import map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+    </script>
+</head>
+
+<body>
+  <!-- Overlay UI -->
+  <div class="overlay">
+    <div class="title">Celestial Heart</div>
+    <div class="hint">Tap to disperse · Swipe to orbit</div>
+  </div>
+
+  <!-- Three.js canvas is injected by script -->
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
