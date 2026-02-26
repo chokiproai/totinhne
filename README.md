@@ -61,6 +61,19 @@
 - 📸 Upload ảnh kỷ niệm lên cây thông
 - ✋ Điều khiển bằng tay qua webcam (MediaPipe)
 
+<br>
+
+## 💕 Love Day Counter — *Đếm Ngày Yêu*
+
+> *Theo dõi hành trình yêu nhau — từng ngày, từng cột mốc, từng khoảnh khắc*
+
+- 📊 Bộ đếm thời gian thực: năm, tháng, ngày, giờ, phút, giây
+- 🏆 Cột mốc tự động: 100 ngày, 1000 ngày, 2 năm, 5 năm...
+- 📅 Lịch âm dương với ngày lễ, sự kiện đặc biệt
+- 👫 Hồ sơ đôi: tên, ảnh, cung hoàng đạo, tuổi
+- 🔔 Thông báo push nhắc nhở ngày kỷ niệm
+- 📸 Xuất ảnh chia sẻ lên mạng xã hội
+
 ---
 
 <div align="center">
@@ -74,6 +87,7 @@
 | 🎨 | **Three.js** | Đồ họa 3D, particle systems, bloom post-processing |
 | ✏️ | **GLSL Shaders** | Shader tùy chỉnh cho hiệu ứng particle |
 | 🖼 | **Vanilla JS** | Không framework — nhẹ, nhanh, portable |
+| ⚛️ | **React + Vite** | Love Day Counter — SPA hiệu suất cao |
 | 🤖 | **MediaPipe** | Hand tracking qua webcam |
 | 🎭 | **CSS Animations** | Hiệu ứng tuyết, aurora, cánh hoa bay |
 
@@ -116,10 +130,13 @@ totinhne/
 │   ├── index.html
 │   ├── script.js
 │   └── style.css
-└── christmas/              ← 🎄 Cây thông Noel
+├── christmas/              ← 🎄 Cây thông Noel
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
+└── loveday/                ← 💕 Đếm ngày yêu
     ├── index.html
-    ├── script.js
-    └── style.css
+    └── assets/
 ```
 
 ---

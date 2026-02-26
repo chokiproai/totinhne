@@ -1,0 +1,32 @@
+{
+  "name": "Đếm Ngày Yêu",
+  "short_name": "LoveDay",
+  "description": "Đếm từng giây bên người yêu thương",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff1f2",
+  "theme_color": "#f43f5e",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Widget Tình Yêu",
+      "short_name": "Widget",
+      "description": "Xem widget đếm ngày yêu nhau",
+      "url": "/#/widget",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}
