@@ -1,9 +1,8 @@
-self.addEventListener('install', (e) => {
+self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
-
-self.addEventListener('activate', (e) => {
-    e.waitUntil(
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(keyList.map((key) => caches.delete(key)));
         }).then(() => {
@@ -11,13 +10,6 @@ self.addEventListener('activate', (e) => {
         })
     );
 });
-
-self.addEventListener('message', (event) => {
-    if (event.data === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
-});
-
 self.addEventListener('fetch', (event) => {
-    event.respondWith(fetch(event.request));
+    // Không dùng cache nữa, luôn fetch qua mạng
 });
