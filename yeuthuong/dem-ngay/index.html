@@ -15,20 +15,41 @@
     localStorage.setItem('x_disabled_notes_x', 'v4.1');
   </script>
 
-  <script type="module" crossorigin src="assets/index-v4.js"></script>
-  <link rel="stylesheet" crossorigin href="assets/index-C4sMJuFP.css">
+  <script type="module" crossorigin src="assets/index-v4.js?v=5.0"></script>
+  <link rel="stylesheet" crossorigin href="assets/index-C4sMJuFP.css?v=5.0">
 </head>
 
 <body>
   <div id="root"></div>
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      });
+    // Tự động clear cache và reload trang khi có bản cập nhật mới
+    const CURRENT_VER = '5.0';
+    if (localStorage.getItem('yt_app_ver') !== CURRENT_VER) {
+      localStorage.setItem('yt_app_ver', CURRENT_VER);
+
+      // Xóa tất cả Service Worker cũ
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+
+      // Xóa Cache Storage của trình duyệt (thường chứa các file ngầm)
+      if ('caches' in window) {
+        caches.keys().then((names) => {
+          for (let name of names) {
+            caches.delete(name);
+          }
+        });
+      }
+
+      // Đợi nửa giây cho quá trình dọn dẹp xong rồi ép Force Reload
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 500);
     }
   </script>
 </body>
