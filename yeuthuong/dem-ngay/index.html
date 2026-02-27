@@ -10,11 +10,12 @@
   <title>Đếm Ngày Yêu 💕</title>
   <meta name="description" content="Đếm ngày yêu nhau — Theo dõi cột mốc tình yêu cùng người ấy" />
 
-  <!-- Chặn hiển thị modal Có gì mới (version v4.1 trùng với mã trong bundle) -->
-  <script>localStorage.setItem('patch_notes_seen_version', 'v4.1');</script>
+  <script>
+    localStorage.setItem('patch_notes_seen_version', 'v4.1');
+    localStorage.setItem('x_disabled_notes_x', 'v4.1');
+  </script>
 
   <style>
-    /* Ẩn triệt để modal Có gì mới nếu react vẫn cố render */
     .fixed.inset-0.z-\[9999\],
     .fixed.inset-0.z-50 {
       display: none !important;
