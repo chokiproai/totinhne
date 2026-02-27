@@ -23,15 +23,22 @@
 
 ---
 
-## 💌 Tỏ Tình — *Lời Yêu Thương*
+## 💕 Yêu Thương — *Tỏ tình rồi cùng đếm ngày bên nhau*
 
-> *Tạo một trang web tỏ tình riêng, gửi link cho người ấy — xem họ bấm "Đồng ý" nhé!*
+> *Hai trải nghiệm trong một — tỏ tình lãng mạn & theo dõi hành trình yêu nhau*
 
-- 🎨 Giao diện lãng mạn với hoa rơi & hiệu ứng confetti
+**💌 Tab Tỏ Tình:**
+- 🎨 Giao diện lãng mạn với hoa rơi & confetti
 - ✍️ Tùy chỉnh tên, lời nhắn, giới tính
-- 📱 Tạo QR Code để gửi qua tin nhắn
-- 🎵 Nhạc nền tự động phát
+- 📱 Tạo QR Code / chia sẻ Facebook, Zalo, Messenger
 - 🏃 Nút "Không" chạy trốn khi người ấy muốn từ chối
+
+**💕 Tab Đếm Ngày Yêu:**
+- 📊 Bộ đếm real-time: năm, tháng, ngày, giờ, phút, giây
+- 🏆 Cột mốc tự động: 100 ngày, 1000 ngày, 2 năm, 5 năm...
+- 📅 Lịch âm dương, ngày lễ, sự kiện đặc biệt
+- 👫 Hồ sơ đôi: tên, ảnh, cung hoàng đạo
+- 🔔 Thông báo push nhắc nhở ngày kỷ niệm
 
 <br>
 
@@ -44,35 +51,19 @@
 - 💓 Hiệu ứng nhịp tim đập thực tế
 - 🌸 Cánh hoa bay lơ lửng
 - 💬 12 câu tình yêu tiếng Việt tự động xoay vòng
-- 🎵 Nhạc nền lãng mạn
 - 👆 Chạm để phân tán · Vuốt để xoay
 
 <br>
 
 ## 🎄 Merry Christmas — *Cây Thông Ước Nguyện*
 
-> *Cây thông 3D với ornament lấp lánh — thả đèn ước, bắn pháo hoa, đón ông già Noel bay ngang*
+> *Cây thông 3D — thả đèn ước, bắn pháo hoa, đón ông già Noel bay ngang*
 
-- 🎁 Cây thông Three.js với 100+ ornament (quả cầu, cây kẹo, hộp quà, trái tim)
-- ⭐ Ngôi sao 3D trên đỉnh cây phát sáng
+- 🎁 Cây thông Three.js với 100+ ornament
 - 🏮 Thả đèn ước — viết điều ước, nhìn đèn bay lên trời
 - 🎆 Pháo hoa bắn khi double-click
 - 🎅 Ông già Noel bay qua bầu trời
-- 📸 Upload ảnh kỷ niệm lên cây thông
-- ✋ Điều khiển bằng tay qua webcam (MediaPipe)
-
-<br>
-
-## 💕 Love Day Counter — *Đếm Ngày Yêu*
-
-> *Theo dõi hành trình yêu nhau — từng ngày, từng cột mốc, từng khoảnh khắc*
-
-- 📊 Bộ đếm thời gian thực: năm, tháng, ngày, giờ, phút, giây
-- 🏆 Cột mốc tự động: 100 ngày, 1000 ngày, 2 năm, 5 năm...
-- 📅 Lịch âm dương với ngày lễ, sự kiện đặc biệt
-- 👫 Hồ sơ đôi: tên, ảnh, cung hoàng đạo, tuổi
-- 🔔 Thông báo push nhắc nhở ngày kỷ niệm
-- 📸 Xuất ảnh chia sẻ lên mạng xã hội
+- 📸 Upload ảnh kỷ niệm · ✋ Webcam hand tracking
 
 ---
 
@@ -121,22 +112,18 @@ Truy cập `http://localhost:3000` → Chọn trải nghiệm yêu thích
 ```
 totinhne/
 ├── index.html              ← Landing page
-├── confession/             ← 💌 App tỏ tình
-│   ├── index.html
-│   ├── script.js
-│   ├── style.css
-│   └── img/
+├── yeuthuong/              ← 💕 Yêu Thương
+│   ├── index.html          ← Trang chính
+│   ├── to-tinh/            ← 💌 App tỏ tình
+│   └── dem-ngay/           ← 📊 App đếm ngày
 ├── 3d-heart/               ← 💖 Trái tim 3D
 │   ├── index.html
 │   ├── script.js
 │   └── style.css
-├── christmas/              ← 🎄 Cây thông Noel
-│   ├── index.html
-│   ├── script.js
-│   └── style.css
-└── loveday/                ← 💕 Đếm ngày yêu
+└── christmas/              ← 🎄 Cây thông Noel
     ├── index.html
-    └── assets/
+    ├── script.js
+    └── style.css
 ```
 
 ---
