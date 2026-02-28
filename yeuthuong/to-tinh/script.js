@@ -126,9 +126,29 @@ let state = {
 // ========== INITIALIZATION ==========
 function init() {
     // Parse URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    state.toName = urlParams.get('to');
-    state.genderParam = urlParams.get('g');
+    let params = { to: null, g: null, msg: null };
+
+    // Check for base64 hash first #/share/base64
+    const hashMatch = window.location.hash.match(/^#\/share\/(.+)$/);
+    if (hashMatch) {
+        try {
+            const decoded = JSON.parse(decodeURIComponent(escape(atob(hashMatch[1]))));
+            params.to = decoded.to;
+            params.g = decoded.g;
+            params.msg = decoded.msg;
+        } catch (e) {
+            console.error("Invalid share link");
+        }
+    } else {
+        // Fallback to query params for backward compatibility
+        const urlParams = new URLSearchParams(window.location.search);
+        params.to = urlParams.get('to');
+        params.g = urlParams.get('g');
+        params.msg = urlParams.get('msg');
+    }
+
+    state.toName = params.to;
+    state.genderParam = params.g;
 
     // Apply theme based on gender
     if (state.genderParam === 'm') {
@@ -138,7 +158,7 @@ function init() {
 
     // Setup mode based on URL
     if (state.toName) {
-        setupRecipientMode(urlParams);
+        setupRecipientMode(params);
     } else {
         setupCreatorMode();
     }
@@ -157,7 +177,7 @@ function init() {
 }
 
 // ========== MODE SETUP ==========
-function setupRecipientMode(urlParams) {
+function setupRecipientMode(params) {
     elements.setupModal?.classList.add('hidden');
     elements.mainContent?.classList.remove('hidden');
 
@@ -173,7 +193,7 @@ function setupRecipientMode(urlParams) {
     }
 
     // Get custom message
-    const urlMsg = urlParams.get('msg');
+    const urlMsg = params.msg;
     let defaultMsg = state.genderParam === 'm'
         ? "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm 'gà bông' của tớ nha?"
         : "Tớ đã thích cậu từ lâu lắm rồi. Cậu đồng ý làm người yêu tớ nha?";
@@ -521,16 +541,13 @@ function createLink() {
         return;
     }
 
-    const baseUrl = window.location.href.split('?')[0];
-    let fullUrl = `${baseUrl}?to=${encodeURIComponent(name)}`;
+    const shareData = { to: name };
+    if (gender) shareData.g = gender;
+    if (customMsg) shareData.msg = customMsg;
 
-    if (gender) {
-        fullUrl += `&g=${gender}`;
-    }
-
-    if (customMsg) {
-        fullUrl += `&msg=${encodeURIComponent(customMsg)}`;
-    }
+    const base64Data = btoa(unescape(encodeURIComponent(JSON.stringify(shareData))));
+    const baseUrl = window.location.href.split('?')[0].split('#')[0];
+    const fullUrl = `${baseUrl}#/share/${base64Data}`;
 
     if (elements.generatedLinkInput) {
         elements.generatedLinkInput.value = fullUrl;
