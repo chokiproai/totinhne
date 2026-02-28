@@ -255,7 +255,7 @@ function setupCreatorMode() {
 
     // Go to link button
     elements.goToLinkBtn?.addEventListener('click', () => {
-        window.location.href = elements.generatedLinkInput.value;
+        window.open(elements.generatedLinkInput.value, '_blank');
     });
 }
 
