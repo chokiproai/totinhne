@@ -29,22 +29,104 @@ const CONFIG = {
     },
 };
 
-/* ─── Love Quotes ─────────────────────────────────────────── */
+/* ─── Love Quotes & Special Events ────────────────────────── */
 
-const LOVE_QUOTES = [
-    '❝ Em là tất cả những gì anh cần ❞',
-    '❝ Yêu em hơn cả ngàn vì sao ❞',
-    '❝ Trái tim này chỉ đập vì em ❞',
-    '❝ Anh sẽ yêu em đến tận cùng thời gian ❞',
-    '❝ Em là giấc mơ đẹp nhất đời anh ❞',
-    '❝ Bên em, thế giới như ngừng quay ❞',
-    '❝ Mỗi nhịp tim là một lần nhớ em ❞',
-    '❝ Em là ánh sáng giữa bầu trời đêm ❞',
-    '❝ You are my forever and always ❞',
-    '❝ Cả vũ trụ thu bé lại bằng nụ cười em ❞',
-    '❝ Anh muốn nắm tay em đi qua mọi mùa ❞',
-    '❝ Em khiến trái tim anh trở nên ấm áp ❞',
+const SONG_LYRICS = [
+    { time: 0, text: "" },
+    { time: 14, text: "Anh không thể nói được lời ngọt ngào như bao người" },
+    { time: 19, text: "Anh không thể hát được bài tình ca em thích" },
+    { time: 24, text: "Anh không hề biết cách dành tặng em những bất ngờ" },
+    { time: 29, text: "Nên anh chẳng dám nói ra là đã yêu" },
+    { time: 35, text: "Thay lời anh gửi với gió vài câu hát" },
+    { time: 39, text: "Êm đềm như làn mây trôi biển xanh ngát" },
+    { time: 42, text: "Câu tình ca này không hay thì xin em đừng xua tay" },
+    { time: 47, text: "Bao ngày mong chờ anh mơ về em đấy" },
+    { time: 51, text: "Đắng cay nơi này em ơi người có thấy" },
+    { time: 55, text: "Mất em sẽ buồn sẽ đau khi cách xa..." },
+    { time: 58, text: "Nên anh chẳng thể...!" },
+    { time: 61, text: "Vì anh chẳng muốn thấy em khóc" },
+    { time: 64, text: "Càng không thể nói cho em biết" },
+    { time: 67, text: "Tình yêu này vẫn cứ vẹn nguyên như ngày đầu tiên" },
+    { time: 73, text: "Vì anh sợ mất thứ duy nhất" },
+    { time: 76, text: "Muốn giữ em thật lâu, yêu em đậm sâu" },
+    { time: 79, text: "Vì một mai nói ra liệu ta có còn bên nhau nữa không?" },
+    { time: 90, text: "Có nỗi nhớ đêm về anh tự thu mình trong giấc mơ sâu" },
+    { time: 95, text: "Có tình yêu không thể nói, làm cho lòng anh xác xơ nhiều" },
+    { time: 100, text: "Yêu và xa và quên... Thương là đau là nhớ" },
+    { time: 106, text: "Gió vấn vương sao mây hững hờ, những xót xa đâu ai có ngờ" },
+    { time: 112, text: "Khi màn đêm dần buông lơi..." },
+    { time: 115, text: "Anh dạo bước chân giữa lối quen với một chút men nhấm môi" },
+    { time: 119, text: "Sắc màu tối tràn ngập khắp nơi lối về bỗng xa vời" },
+    { time: 125, text: "Và nơi nào ta sẽ có em đến suốt đời" },
+    { time: 130, text: "Nếu lỡ một mai... Câu ca này nói nên lời vì ai" },
+    { time: 135, text: "Thì xin em đừng xua tay..." },
+    { time: 141, text: "Vì anh chẳng muốn thấy em khóc" },
+    { time: 144, text: "Càng không thể nói cho em biết" },
+    { time: 147, text: "Tình yêu này vẫn cứ vẹn nguyên như ngày đầu tiên" },
+    { time: 153, text: "Vì anh sợ mất thứ duy nhất" },
+    { time: 156, text: "Muốn giữ em thật lâu, yêu em đậm sâu" },
+    { time: 159, text: "Vì một mai nói ra liệu ta có còn bên nhau nữa không" },
+    { time: 175, text: "Vì anh chẳng muốn thấy em khóc" },
+    { time: 178, text: "Càng không thể nói cho em biết" },
+    { time: 181, text: "Tình yêu này vẫn cứ vẹn nguyên như ngày đầu tiên" },
+    { time: 187, text: "Vì anh sợ mất thứ duy nhất" },
+    { time: 190, text: "Muốn giữ em thật lâu, yêu em đậm sâu" },
+    { time: 194, text: "Vì một mai nói ra liệu ta có còn bên nhau nữa không..." },
+    { time: 205, text: "" }
 ];
+
+const SPECIAL_EVENTS = {
+    '14/2': {
+        name: 'Valentine Đỏ',
+        quotes: [
+            '❝ Happy Valentine! Cảm ơn em vì đã đến bên anh ❞',
+            '❝ 14/2 năm nay đặc biệt hơn vì có em ❞',
+            '❝ Chúc tình yêu của chúng mình luôn ngọt ngào như sô cô la ❞'
+        ],
+        petals: ['🌹', '💖', '💌', '🍫', '💘']
+    },
+    '14/3': {
+        name: 'Valentine Trắng',
+        quotes: [
+            '❝ 14/3 là ngày đáp lại, và câu trả lời của anh luôn là Yêu Em! ❞',
+            '❝ Tình yêu của chúng ta nhẹ nhàng và trong trẻo như ngày Valentine Trắng ❞',
+            '❝ Mãi mãi bên em không rời! ❞'
+        ],
+        petals: ['🤍', '🕊️', '☁️', '🍬', '💍']
+    },
+    '8/3': {
+        name: 'Quốc Tế Phụ Nữ',
+        quotes: [
+            '❝ Chúc người con gái anh yêu 8/3 rạng rỡ như đóa hồng ❞',
+            '❝ 8/3 hạnh phúc nhé, em luôn là nữ hoàng trong tim anh! ❞',
+            '❝ Tặng em cả thế giới nhân ngày mồng 8 tháng 3 ❞'
+        ],
+        petals: ['🌷', '💐', '👑', '💄', '✨']
+    },
+    '20/10': {
+        name: 'Phụ Nữ Việt Nam',
+        quotes: [
+            '❝ 20/10 chúc cô gái của anh ngày càng xinh đẹp ❞',
+            '❝ Cảm ơn em – bông hoa tự hào nhất của trái tim anh ❞'
+        ],
+        petals: ['🌺', '🎁', '💝', '✨']
+    },
+    '24/12': {
+        name: 'Giáng Sinh Ấm Áp',
+        quotes: [
+            '❝ Merry Christmas! Chúc em luôn ấm áp trong vòng tay anh ❞',
+            '❝ Giáng sinh này, em là món quà tuyệt vời nhất của anh ❞',
+            '❝ Dưới cành tầm gửi, anh đành gửi nụ hôn này cho em ❞'
+        ],
+        petals: ['🎄', '❄️', '⛄', '🎁', '🦌']
+    }
+};
+
+function getCurrentEvent() {
+    const today = new Date();
+    const dateKey = `${today.getDate()}/${today.getMonth() + 1}`;
+    return SPECIAL_EVENTS[dateKey] || null;
+}
 
 /* ─── State ───────────────────────────────────────────────── */
 
@@ -392,7 +474,8 @@ function initPetals() {
     const container = document.getElementById('petals');
     if (!container) return;
 
-    const petalEmojis = ['🌸', '🌺', '💮', '🏵️', '✿'];
+    const event = getCurrentEvent();
+    const petalEmojis = event ? event.petals : ['🌸', '🌺', '💮', '🏵️', '✿'];
 
     function createPetal() {
         const el = document.createElement('div');
@@ -419,19 +502,57 @@ function initPetals() {
 
 function initLoveQuotes() {
     const el = document.getElementById('love-quote');
-    if (!el) return;
+    const audio = document.getElementById('bg-music');
+    if (!el || !audio) return;
 
-    let idx = Math.floor(Math.random() * LOVE_QUOTES.length);
-    el.textContent = LOVE_QUOTES[idx];
+    const event = getCurrentEvent();
+    const introText = event ? event.quotes[0] : '🎵 Anh Chẳng Thể - Haozi 🎵';
 
-    setInterval(() => {
+    // Đặt câu intro mặc định
+    el.textContent = introText;
+
+    let currentLyricIndex = -1;
+    let transitionTimeout;
+
+    // Cập nhật text liên tục dựa vào currentTime của audio
+    audio.addEventListener('timeupdate', () => {
+        const currentTime = audio.currentTime;
+
+        // Tìm câu hát phù hợp
+        let newIndex = -1;
+        for (let i = 0; i < SONG_LYRICS.length; i++) {
+            if (currentTime >= SONG_LYRICS[i].time) {
+                newIndex = i;
+            } else {
+                break;
+            }
+        }
+
+        if (newIndex !== currentLyricIndex && newIndex !== -1) {
+            currentLyricIndex = newIndex;
+
+            // Hủy timeout cũ nếu đang dở hiệu ứng mờ
+            if (transitionTimeout) clearTimeout(transitionTimeout);
+
+            el.classList.add('changing');
+
+            transitionTimeout = setTimeout(() => {
+                const text = SONG_LYRICS[currentLyricIndex].text;
+                el.textContent = text ? '❝ ' + text + ' ❞' : introText;
+                el.classList.remove('changing');
+            }, 600); // 600ms chờ mờ dần rồi đổi text
+        }
+    });
+
+    // Reset lại khi nhạc hết (optional)
+    audio.addEventListener('ended', () => {
+        currentLyricIndex = -1;
         el.classList.add('changing');
         setTimeout(() => {
-            idx = (idx + 1) % LOVE_QUOTES.length;
-            el.textContent = LOVE_QUOTES[idx];
+            el.textContent = introText;
             el.classList.remove('changing');
-        }, 800);
-    }, 8000);
+        }, 600);
+    });
 }
 
 /* ─── Music Control ──────────────────────────────────────── */
