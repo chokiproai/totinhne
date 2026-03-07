@@ -2,27 +2,37 @@ const TEMPLATES = {
     'all': {
         title: 'Gửi một nửa thế giới xinh đẹp,',
         msg: `Nhân ngày <strong style="color:#d81b60;font-size:17px">Quốc tế Phụ nữ 8/3</strong>, xin gửi vạn lời chúc đến từ bà, người mẹ tảo tần, những cô giáo đáng kính, các chị em gái, những người bạn đồng hành... và cả người thương trân quý. 💕<br><br>Cảm ơn tất cả vì sự dịu dàng, hy sinh và tình yêu thương vô tận đã sưởi ấm thế gian này. Kính chúc một nửa thế giới luôn rạng rỡ, bình an, hạnh phúc và tỏa sáng kiêu hãnh như những vì sao trên bầu trời! ✨`,
-        ending: ''
+        ending: '',
+        quote: 'Hạnh phúc không phải là điểm đến, mà là hành trình chúng ta đang đi.',
+        universe: "Happy Women's Day, Vạn điều tốt lành, Tỏa sáng rạng rỡ"
     },
     'mom': {
         title: 'Gửi Mẹ kính yêu,',
         msg: `Ngàn lời chúc tụng bay xa,\nChẳng bằng một lát ở nhà bềnh bồng.\nNụ cười rạng rỡ của mẹ,\nCả đời ấm áp chở che đàn con.`,
-        ending: 'Ký tên: Người con Tùy Bút'
+        ending: 'Ký tên: Người con Tùy Bút',
+        quote: 'Mẹ là biển cả bao la, là bầu trời cao rộng sưởi ấm tâm hồn con.',
+        universe: 'Con yêu Mẹ nhiều, Cảm ơn Mẹ yêu, Mãi mạnh khỏe Mẹ nhé'
     },
     'teacher': {
         title: 'Lời Yêu Gửi Cô',
         msg: `Bao năm vất vả vì người,\nNay ngày tám tháng ba tuyệt vời tri ân.\nChúc cô khoẻ mạnh bình an,\nĐể dìu dắt tiếp muôn vàn đàn em.`,
-        ending: 'Ký tên: Học trò nhỏ'
+        ending: 'Ký tên: Học trò nhỏ',
+        quote: 'Người thầy cầm tay, mở ra trí óc và chạm đến trái tim.',
+        universe: 'Tri ân Cô giáo, Chúc mừng 8/3, Luôn tươi trẻ hạnh phúc'
     },
     'friend': {
         title: 'Gửi Nhỏ Bạn Thân',
         msg: `Chúc mày mùng tám tháng ba,\nXinh tươi rạng rỡ như hoa trên cành.\nLuôn vui khỏe, bớt đành hanh,\nSớm tìm được mối dỗ dành sớm hôm!`,
-        ending: 'Từ đứa bạn thân duy nhất'
+        ending: 'Từ đứa bạn thân duy nhất',
+        quote: 'Bạn thân là những người hiểu được quá khứ, tin vào tương lai và chấp nhận ta của hiện tại.',
+        universe: 'Mãi là bạn tốt, Bớt đành hanh nhé, 8/3 rực rỡ'
     },
     'lover': {
         title: 'Chỉ Dành Cho Em',
         msg: `Thế giới rộng đủ để ta lạc nhau,\nNhưng nụ cười em làm anh phải quay bước.\nChúc em ngày Tám tháng Ba kiêu hãnh,\nVà một đời trọn vẹn ở bên anh.`,
-        ending: 'Yêu em, Chàng ngốc của em'
+        ending: 'Yêu em, Chàng ngốc của em',
+        quote: 'Gặp gỡ là duyên, ở lại là tình, và nắm tay nhau đi hết cuộc đời là nợ.',
+        universe: 'Yêu em mãi mãi, Công chúa của anh, Hạnh phúc bên nhau'
     }
 };
 
@@ -32,6 +42,8 @@ let pageTitle = "Happy Women's Day! 💖";
 let letterTitle = TEMPLATES['all'].title;
 let letterMsg = TEMPLATES['all'].msg;
 let letterEnding = TEMPLATES['all'].ending;
+let letterQuote = "Sự tồn tại của bạn vốn dĩ đã là một tuyệt tác của thương đế. Hãy cứ mỉm cười thật rạng rỡ và hạnh phúc mỗi ngày!";
+let letterUniverse = "Happy Women's Day, Yêu bạn nhiều ❤️, 8/3 💕";
 let paperStyle = 'pink';
 
 const hashLocation = window.location.hash;
@@ -65,6 +77,8 @@ if (hashLocation.startsWith('#/share/')) {
             if (shareData.t) letterTitle = shareData.t;
             if (shareData.m) letterMsg = shareData.m;
             if (shareData.e) letterEnding = shareData.e;
+            if (shareData.q) letterQuote = shareData.q;
+            if (shareData.u) letterUniverse = shareData.u;
         }
 
         if (shareData.p) paperStyle = shareData.p;
@@ -123,11 +137,16 @@ const LETTER = `<div style="text-align:center;margin:8px 0 16px;">
 <div style="position:relative;background:linear-gradient(135deg,rgba(255,245,247,0.7),rgba(252,228,236,0.4));border-radius:12px;padding:14px 16px;border:1px dashed rgba(216,27,96,0.4)">
   <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#fff;padding:0 8px;color:#f06292;font-size:18px">🌸</div>
   <p style="font-size:16px;line-height:1.8;color:#5d4037;margin:6px 0 0;font-family:'Comic Neue',cursive;text-align:center;font-style:italic;font-weight:bold">
-    "Sự tồn tại của bạn vốn dĩ đã là một tuyệt tác của thương đế. Hãy cứ mỉm cười thật rạng rỡ và hạnh phúc mỗi ngày!"
+    "${letterQuote}"
   </p>
 </div>`;
 
-window.UNIVERSE_MSGS = ["Happy Women's Day", "Yêu bạn nhiều ❤️", "8/3 💕"];
+// Set the global messages for petals.js (inlined in index.html)
+window.UNIVERSE_MSGS = letterUniverse.split(',').map(s => s.trim()).filter(s => s !== "");
+// Fallback if empty
+if (window.UNIVERSE_MSGS.length === 0) {
+    window.UNIVERSE_MSGS = ["Happy Women's Day", "Yêu bạn nhiều ❤️", "8/3 💕"];
+}
 
 /* ============ GARDEN ============ */
 (function () {
@@ -414,12 +433,16 @@ templateChips.forEach(chip => {
             customTitleInput.value = '';
             customMsgInput.value = '';
             customEndingInput.value = '';
+            document.getElementById('custom-quote').value = '';
+            document.getElementById('custom-universe').value = '';
             customTitleInput.focus();
         } else if (TEMPLATES[val]) {
             // Strip out the html tags for the editor
             customTitleInput.value = TEMPLATES[val].title.replace(/<[^>]*>?/gm, '');
             customMsgInput.value = TEMPLATES[val].msg.replace(/<[^>]*>?/gm, '').replace(/<br>/g, '\n');
             customEndingInput.value = TEMPLATES[val].ending || '';
+            document.getElementById('custom-quote').value = TEMPLATES[val].quote || '';
+            document.getElementById('custom-universe').value = TEMPLATES[val].universe || '';
         }
     });
 });
@@ -437,6 +460,8 @@ generateLinkBtn.addEventListener('click', () => {
     const t = customTitleInput.value.trim();
     const m = customMsgInput.value.trim();
     const e_val = customEndingInput.value.trim();
+    const q_val = document.getElementById('custom-quote').value.trim();
+    const u_val = document.getElementById('custom-universe').value.trim();
 
     if (!t || !m) {
         alert("Vui lòng nhập cả tiêu đề và nội dung thư nhé!");
@@ -472,6 +497,9 @@ generateLinkBtn.addEventListener('click', () => {
         shareData.m = formattedMsg;
         if (e_val) shareData.e = e_val;
     }
+    // Always preserve custom quote and universe text if provided
+    if (q_val) shareData.q = q_val;
+    if (u_val) shareData.u = u_val;
     if (p && p !== 'pink') shareData.p = p;
 
     // Encode string payload using LZString for optimal compression, fallback to base64 if it fails
