@@ -15,13 +15,25 @@
 
 <br>
 
-*Ba trải nghiệm web lãng mạn — mỗi trải nghiệm là một cách nói "Anh yêu em"*
+*Bốn trải nghiệm web lãng mạn — mỗi trải nghiệm là một cách nói "Anh yêu em"*
 
 <br>
 
 </div>
 
 ---
+
+## 🌸 Quà Tặng 8/3 — *Hoa Hồng & Thiên Hà*
+
+> *Một món quà 3D tinh tế kết hợp giữa vẻ đẹp rực rỡ của vườn hoa và sự hùng vĩ của vũ trụ*
+
+- ✉️ **Phong bì lãng mạn:** Hiệu ứng mở thư và gõ chữ (typing animation) thực tế.
+- 🌹 **Vườn hoa 3D:** Các loại hoa (Hồng, Tulip, Cúc...) nở rộ sinh động với hiệu ứng hạt sáng.
+- 🌌 **Hộp quà Universe:** Mở hộp quà bí mật để kích hoạt hoạt cảnh thiên hà 3D lung linh.
+- ✍️ **Creator Mode:** Tự thiết kế trang web với các mẫu thơ có sẵn cho Mẹ, Cô giáo, Bạn bè, Người yêu.
+- 🎶 **Trải nghiệm Premium:** Nhạc nền Piano sâu lắng, cánh hoa bay lơ lửng, hỗ trợ QR Code và nén link (LZString).
+
+<br>
 
 ## 💕 Yêu Thương — *Tỏ tình rồi cùng đếm ngày bên nhau*
 
@@ -38,7 +50,8 @@
 - 🏆 Cột mốc tự động: 100 ngày, 1000 ngày, 2 năm, 5 năm...
 - 📅 Lịch âm dương, ngày lễ, sự kiện đặc biệt
 - 👫 Hồ sơ đôi: tên, ảnh, cung hoàng đạo
-- 🔔 Thông báo push nhắc nhở ngày kỷ niệm
+- 🚀 Love Day Counter — SPA hiệu suất cao (React + Vite)
+- 🤖 MediaPipe — Webcam hand tracking tương tác
 
 <br>
 
@@ -63,7 +76,7 @@
 - 🏮 Thả đèn ước — viết điều ước, nhìn đèn bay lên trời
 - 🎆 Pháo hoa bắn khi double-click
 - 🎅 Ông già Noel bay qua bầu trời
-- 📸 Upload ảnh kỷ niệm · ✋ Webcam hand tracking
+- 📸 Upload ảnh kỷ niệm · ✋ Webcam hand tracking tương tác
 
 ---
 
@@ -76,10 +89,11 @@
 | | Công nghệ | Mô tả |
 |---|---|---|
 | 🎨 | **Three.js** | Đồ họa 3D, particle systems, bloom post-processing |
-| ✏️ | **GLSL Shaders** | Shader tùy chỉnh cho hiệu ứng particle |
-| 🖼 | **Vanilla JS** | Không framework — nhẹ, nhanh, portable |
-| ⚛️ | **React + Vite** | Love Day Counter — SPA hiệu suất cao |
-| 🤖 | **MediaPipe** | Hand tracking qua webcam |
+| ✏️ | **GLSL Shaders** | Shader tùy chỉnh cho hiệu ứng hạt & ánh sáng |
+| 🖼 | **Vanilla JS** | Không framework — nhẹ, nhanh, linh hoạt |
+| ⚛️ | **React + Vite** | Sử dụng cho module Love Day Counter |
+| 📦 | **LZString** | Nén dữ liệu URL giúp QR Code dễ quét |
+| 🤖 | **MediaPipe** | Xử lý Hand tracking tương tác qua webcam |
 | 🎭 | **CSS Animations** | Hiệu ứng tuyết, aurora, cánh hoa bay |
 
 ---
@@ -111,19 +125,18 @@ Truy cập `http://localhost:3000` → Chọn trải nghiệm yêu thích
 
 ```
 totinhne/
-├── index.html              ← Landing page
+├── index.html              ← Landing page chính
+├── 8-3_gift/               ← 🌸 Quà Tặng 8/3 (Mới)
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css
+│   └── bg-music.mp3
 ├── yeuthuong/              ← 💕 Yêu Thương
-│   ├── index.html          ← Trang chính
+│   ├── index.html
 │   ├── to-tinh/            ← 💌 App tỏ tình
 │   └── dem-ngay/           ← 📊 App đếm ngày
 ├── 3d-heart/               ← 💖 Trái tim 3D
-│   ├── index.html
-│   ├── script.js
-│   └── style.css
 └── christmas/              ← 🎄 Cây thông Noel
-    ├── index.html
-    ├── script.js
-    └── style.css
 ```
 
 ---
