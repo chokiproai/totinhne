@@ -372,6 +372,7 @@ function startTyping() {
 
 document.getElementById('giftBtn').addEventListener('click', () => {
     if (typeof window.initUniverse === 'function') window.initUniverse();
+    playMusic();
 });
 
 /* ============ MUSIC ============ */
@@ -644,6 +645,7 @@ document.getElementById('go-to-link-btn')?.addEventListener('click', () => {
     const link = document.getElementById('generated-link')?.value;
     if (link) {
         window.open(link, '_blank');
+        playMusic();
     }
 });
 
